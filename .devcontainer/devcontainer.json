@@ -1,0 +1,37 @@
+{
+  "name": "Remerg Mobile (Expo)",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:22",
+
+  // Metro serves the web build and the Expo Go manifest on 8081. The 190xx
+  // ports are Expo's legacy dev-server range; 8097 is React DevTools.
+  "forwardPorts": [8081, 19000, 19001, 19006, 8097],
+  "portsAttributes": {
+    "8081": { "label": "Expo / Metro", "onAutoForward": "notify" },
+    "19000": { "label": "Expo dev server" },
+    "19001": { "label": "Expo dev server (alt)" },
+    "19006": { "label": "Expo web (legacy)" },
+    "8097": { "label": "React DevTools" }
+  },
+
+  "postCreateCommand": "npm install",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "expo.vscode-expo-tools",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode"
+      ],
+      "settings": {
+        "editor.formatOnSave": true,
+        "typescript.tsdk": "node_modules/typescript/lib"
+      }
+    }
+  },
+
+  "remoteEnv": {
+    // Metro must listen on all interfaces for the Codespaces port forwarder to
+    // reach it; the default localhost bind is not forwardable.
+    "REACT_NATIVE_PACKAGER_HOSTNAME": "0.0.0.0"
+  }
+}

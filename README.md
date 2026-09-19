@@ -103,11 +103,40 @@ npx expo start        # then scan the QR code with Expo Go
 ```
 
 ```bash
+npm run web           # browser
+npm run tunnel        # Expo Go over a public tunnel (remote/NAT'd hosts)
 npm run android
 npm run ios           # macOS only
-npm run web
-npx tsc --noEmit      # typecheck
+npm run typecheck
 ```
+
+### In GitHub Codespaces
+
+`.devcontainer/devcontainer.json` installs dependencies and forwards the ports, so a fresh
+codespace is ready to run. Two ways to see the app:
+
+**Browser (fastest).** Run `npm run web`, then open the forwarded **8081** URL from the Ports tab.
+Codespaces gives it an `https://<codespace>-8081.app.github.dev` address. For a realistic view,
+open browser devtools and switch on device emulation — this is a phone layout.
+
+**Real phone via Expo Go (highest fidelity).** Plain `npx expo start` will not work: a codespace is
+not on your wifi, so the phone cannot reach Metro on a LAN address. Use the tunnel instead:
+
+```bash
+npm run tunnel
+```
+
+`@expo/ngrok` is already a devDependency, so this needs no extra install. Scan the QR code with
+Expo Go and the app loads over the public tunnel.
+
+> To open the web URL on your phone rather than your laptop, set port 8081 to **Public** in the
+> Ports tab first — forwarded ports are private to your GitHub account by default, and the phone
+> browser will hit a login wall otherwise.
+
+**What web mode will not show you:** `tel:` dialing, haptics, and the native maps handoff are all
+no-ops in a browser. The layout, navigation, theming, offline data and filtering are all faithful —
+but the single most important interaction in this app, one-tap calling, can only be verified on a
+real device.
 
 ## Layout
 
