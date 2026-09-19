@@ -1,11 +1,10 @@
-import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { ActivityIndicator, Pressable, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Pressable, Text, View } from 'react-native';
 
 import { CrisisBar } from '@/components/crisis-bar';
+import { Icon } from '@/components/ui/icon';
 import { Screen } from '@/components/ui/screen';
-import { Radius, Spacing } from '@/constants/theme';
 import { MAP_CATEGORIES, type MapCategory } from '@/data/taxonomy';
 import { useTheme } from '@/hooks/use-theme';
 import { fetchMapCategories } from '@/lib/remerg';
@@ -29,24 +28,24 @@ export default function DirectoryScreen() {
 
   return (
     <Screen>
-      <Text style={[styles.h1, { color: colors.text }]}>Find a place</Text>
-      <Text style={[styles.sub, { color: colors.textSecondary }]}>
+      <Text className="text-[28px] font-extrabold tracking-tight text-ink">Find a place</Text>
+      <Text className="mb-3.5 mt-1 text-sm leading-5 text-muted">
         The six categories on Remerg&apos;s resource map.
       </Text>
 
       <CrisisBar />
 
-      <View style={styles.status}>
+      <View className="mb-2 mt-3.5 min-h-[20px] flex-row items-center gap-2">
         {live === null ? (
           <ActivityIndicator size="small" color={colors.textSecondary} />
         ) : (
-          <Ionicons
-            name={live ? 'cloud-done-outline' : 'cloud-offline-outline'}
+          <Icon
+            name={live ? 'mci:cloud-check-outline' : 'mci:cloud-off-outline'}
             size={15}
-            color={colors.textSecondary}
+            className="text-muted"
           />
         )}
-        <Text style={[styles.statusText, { color: colors.textSecondary }]}>
+        <Text className="text-xs font-semibold text-muted">
           {live === null
             ? 'Checking remerg.com…'
             : live
@@ -61,39 +60,17 @@ export default function DirectoryScreen() {
           onPress={() => router.push(`/category/${cat.slug}`)}
           accessibilityRole="button"
           accessibilityLabel={cat.name}
-          style={({ pressed }) => [
-            styles.row,
-            { backgroundColor: colors.background, borderColor: colors.border, opacity: pressed ? 0.75 : 1 },
-          ]}>
-          <View style={[styles.icon, { backgroundColor: colors.backgroundElement }]}>
-            <Ionicons name={cat.icon} size={22} color={colors.tint} />
+          className="mt-2.5 flex-row items-center gap-3.5 rounded-card border border-line bg-surface p-3.5 active:opacity-75">
+          <View className="h-12 w-12 items-center justify-center rounded-2xl bg-brand-soft">
+            <Icon name={cat.icon} size={24} className="text-brand" />
           </View>
-          <View style={{ flex: 1 }}>
-            <Text style={[styles.rowTitle, { color: colors.text }]}>{cat.name}</Text>
-            <Text style={[styles.rowBlurb, { color: colors.textSecondary }]}>{cat.blurb}</Text>
+          <View className="flex-1">
+            <Text className="text-base font-bold text-ink">{cat.name}</Text>
+            <Text className="mt-0.5 text-[13px] leading-5 text-muted">{cat.blurb}</Text>
           </View>
-          <Ionicons name="chevron-forward" size={18} color={colors.textSecondary} />
+          <Icon name="ion:chevron-forward" size={18} className="text-muted" />
         </Pressable>
       ))}
     </Screen>
   );
 }
-
-const styles = StyleSheet.create({
-  h1: { fontSize: 28, fontWeight: '800', letterSpacing: -0.5 },
-  sub: { fontSize: 14, lineHeight: 20, marginTop: Spacing.one, marginBottom: Spacing.three },
-  status: { flexDirection: 'row', alignItems: 'center', gap: Spacing.two, marginTop: Spacing.three, marginBottom: Spacing.two, minHeight: 20 },
-  statusText: { fontSize: 12, fontWeight: '600' },
-  row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: Spacing.three,
-    padding: Spacing.three,
-    borderRadius: Radius.lg,
-    borderWidth: StyleSheet.hairlineWidth,
-    marginTop: Spacing.two,
-  },
-  icon: { width: 44, height: 44, borderRadius: Radius.md, alignItems: 'center', justifyContent: 'center' },
-  rowTitle: { fontSize: 16, fontWeight: '700' },
-  rowBlurb: { fontSize: 13, lineHeight: 18, marginTop: 2 },
-});

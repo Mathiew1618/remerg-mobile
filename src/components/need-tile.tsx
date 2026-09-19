@@ -1,9 +1,7 @@
-import { Ionicons } from '@expo/vector-icons';
-import { Pressable, StyleSheet, Text } from 'react-native';
+import { Pressable, Text, View } from 'react-native';
 
-import { Radius, Spacing } from '@/constants/theme';
+import { Icon } from '@/components/ui/icon';
 import type { Need } from '@/data/taxonomy';
-import { useTheme } from '@/hooks/use-theme';
 
 type Props = {
   need: Need;
@@ -11,41 +9,32 @@ type Props = {
   selected?: boolean;
 };
 
-/** Big, iconographic, two-per-row. Readable at arm's length and low literacy. */
+/**
+ * Big, iconographic, two per row — readable at arm's length and by someone who
+ * reads slowly. The icon sits in its own tinted chip so the symbol, not the
+ * word, is what you scan for.
+ */
 export function NeedTile({ need, onPress, selected = false }: Props) {
-  const colors = useTheme();
   return (
     <Pressable
       onPress={onPress}
       accessibilityRole="button"
       accessibilityState={{ selected }}
       accessibilityLabel={need.label}
-      style={({ pressed }) => [
-        styles.tile,
-        {
-          backgroundColor: selected ? colors.tint : colors.backgroundElement,
-          borderColor: selected ? colors.tint : colors.border,
-          opacity: pressed ? 0.8 : 1,
-        },
-      ]}>
-      <Ionicons name={need.icon} size={26} color={selected ? colors.onTint : colors.tint} />
-      <Text numberOfLines={2} style={[styles.label, { color: selected ? colors.onTint : colors.text }]}>
+      className={`min-h-[116px] flex-grow basis-[47%] justify-between rounded-card border p-3.5 active:opacity-80 ${
+        selected ? 'border-brand bg-brand' : 'border-line bg-surface'
+      }`}>
+      <View
+        className={`h-11 w-11 items-center justify-center rounded-2xl ${
+          selected ? 'bg-brand-on/20' : 'bg-brand-soft'
+        }`}>
+        <Icon name={need.icon} size={24} className={selected ? 'text-brand-on' : 'text-brand'} />
+      </View>
+      <Text
+        numberOfLines={2}
+        className={`text-[15px] font-bold leading-5 ${selected ? 'text-brand-on' : 'text-ink'}`}>
         {need.short}
       </Text>
     </Pressable>
   );
 }
-
-const styles = StyleSheet.create({
-  tile: {
-    flexGrow: 1,
-    flexBasis: '47%',
-    minHeight: 96,
-    borderRadius: Radius.lg,
-    borderWidth: StyleSheet.hairlineWidth,
-    padding: Spacing.three,
-    gap: Spacing.two,
-    justifyContent: 'center',
-  },
-  label: { fontSize: 15, fontWeight: '700', lineHeight: 19 },
-});

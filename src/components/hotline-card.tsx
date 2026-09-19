@@ -1,33 +1,34 @@
-import { Ionicons } from '@expo/vector-icons';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, Text, View } from 'react-native';
 
 import { CallButton } from '@/components/call-button';
-import { Radius, Spacing } from '@/constants/theme';
-import type { Hotline } from '@/data/hotlines';
-import { useTheme } from '@/hooks/use-theme';
+import { Badge } from '@/components/ui/badge';
+import { Icon } from '@/components/ui/icon';
+import type { Availability, Hotline } from '@/data/hotlines';
 import { useProfile } from '@/lib/profile-context';
 
+const AVAILABILITY: Record<Availability, { text: string; tone: 'accent' | 'neutral' }> = {
+  '24/7': { text: 'Open 24/7', tone: 'accent' },
+  hours: { text: 'Business hours', tone: 'neutral' },
+  varies: { text: 'Hours vary by area', tone: 'neutral' },
+};
+
 export function HotlineCard({ hotline }: { hotline: Hotline }) {
-  const colors = useTheme();
   const { profile, toggleSaved } = useProfile();
   const urgent = hotline.category === 'emergency' || hotline.category === 'crisis';
   const isSaved = profile.saved.includes(hotline.id);
+  const availability = AVAILABILITY[hotline.availability];
 
   return (
-    <View style={[styles.card, { backgroundColor: colors.background, borderColor: colors.border }]}>
-      <View style={styles.header}>
-        <View style={styles.titleWrap}>
-          <Text style={[styles.title, { color: colors.text }]}>{hotline.name}</Text>
-          <View style={styles.badges}>
-            {hotline.availability === '24/7' ? (
-              <Badge text="24/7" bg={colors.accentSurface} fg={colors.accent} />
-            ) : null}
-            {hotline.availability === 'varies' ? (
-              <Badge text="Hours vary by area" bg={colors.backgroundElement} fg={colors.textSecondary} />
-            ) : null}
-            {hotline.availability === 'hours' ? (
-              <Badge text="Business hours" bg={colors.backgroundElement} fg={colors.textSecondary} />
-            ) : null}
+    <View className="mb-3 rounded-card border border-line bg-surface p-3.5">
+      <View className="flex-row items-start gap-2">
+        <View className="flex-1">
+          <Text className="text-[17px] font-bold leading-6 text-ink">{hotline.name}</Text>
+          <View className="mt-1.5 flex-row flex-wrap gap-1">
+            <Badge
+              text={availability.text}
+              tone={availability.tone}
+              icon={hotline.availability === '24/7' ? 'mci:clock-outline' : undefined}
+            />
           </View>
         </View>
 
@@ -35,17 +36,19 @@ export function HotlineCard({ hotline }: { hotline: Hotline }) {
           onPress={() => toggleSaved(hotline.id)}
           hitSlop={12}
           accessibilityRole="button"
-          accessibilityLabel={isSaved ? `Unpin ${hotline.name}` : `Pin ${hotline.name}`}>
-          <Ionicons
-            name={isSaved ? 'bookmark' : 'bookmark-outline'}
+          accessibilityState={{ selected: isSaved }}
+          accessibilityLabel={isSaved ? `Unpin ${hotline.name}` : `Pin ${hotline.name}`}
+          className="active:opacity-60">
+          <Icon
+            name={isSaved ? 'mci:bookmark' : 'mci:bookmark-outline'}
             size={22}
-            color={isSaved ? colors.tint : colors.textSecondary}
+            className={isSaved ? 'text-brand' : 'text-muted'}
           />
         </Pressable>
       </View>
 
       {hotline.description ? (
-        <Text style={[styles.desc, { color: colors.textSecondary }]}>{hotline.description}</Text>
+        <Text className="mt-2 text-sm leading-5 text-muted">{hotline.description}</Text>
       ) : null}
 
       {hotline.numbers.map((n) => (
@@ -60,27 +63,3 @@ export function HotlineCard({ hotline }: { hotline: Hotline }) {
     </View>
   );
 }
-
-function Badge({ text, bg, fg }: { text: string; bg: string; fg: string }) {
-  return (
-    <View style={[styles.badge, { backgroundColor: bg }]}>
-      <Text style={[styles.badgeText, { color: fg }]}>{text}</Text>
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  card: {
-    borderRadius: Radius.lg,
-    borderWidth: StyleSheet.hairlineWidth,
-    padding: Spacing.three,
-    marginBottom: Spacing.three,
-  },
-  header: { flexDirection: 'row', alignItems: 'flex-start', gap: Spacing.two },
-  titleWrap: { flex: 1 },
-  title: { fontSize: 17, fontWeight: '700', lineHeight: 22 },
-  badges: { flexDirection: 'row', flexWrap: 'wrap', gap: Spacing.one, marginTop: Spacing.one },
-  badge: { paddingHorizontal: Spacing.two, paddingVertical: 2, borderRadius: Radius.pill },
-  badgeText: { fontSize: 11, fontWeight: '700' },
-  desc: { fontSize: 14, lineHeight: 20, marginTop: Spacing.two },
-});

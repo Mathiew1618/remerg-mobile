@@ -1,9 +1,7 @@
-import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, Text, View } from 'react-native';
 
-import { Radius, Spacing } from '@/constants/theme';
-import { useTheme } from '@/hooks/use-theme';
+import { Icon } from '@/components/ui/icon';
 import { callNumber } from '@/lib/dial';
 
 /**
@@ -15,19 +13,19 @@ import { callNumber } from '@/lib/dial';
  * dials 988 immediately and the right half opens the full list.
  */
 export function CrisisBar() {
-  const colors = useTheme();
-
   return (
-    <View style={[styles.wrap, { backgroundColor: colors.crisisSurface, borderColor: colors.crisis }]}>
+    <View className="flex-row items-center gap-2 rounded-card border border-crisis/30 bg-crisis-soft p-2">
       <Pressable
         onPress={() => callNumber('988', 'Suicide & Crisis Lifeline')}
         accessibilityRole="button"
         accessibilityLabel="Call 988, the Suicide and Crisis Lifeline"
-        style={({ pressed }) => [styles.primary, { backgroundColor: colors.crisis, opacity: pressed ? 0.8 : 1 }]}>
-        <Ionicons name="call" size={18} color="#FFFFFF" />
+        className="min-h-[54px] flex-1 flex-row items-center gap-2.5 rounded-field bg-crisis px-3.5 active:opacity-80">
+        <View className="h-8 w-8 items-center justify-center rounded-full bg-white/20">
+          <Icon name="mci:phone-in-talk" size={18} color="#FFFFFF" />
+        </View>
         <View>
-          <Text style={styles.primaryTitle}>Need help now</Text>
-          <Text style={styles.primarySub}>Call 988 · 24/7</Text>
+          <Text className="text-[15px] font-extrabold text-white">Need help now</Text>
+          <Text className="text-xs font-semibold text-white/90">Call 988 · 24/7</Text>
         </View>
       </Pressable>
 
@@ -36,35 +34,10 @@ export function CrisisBar() {
         accessibilityRole="button"
         accessibilityLabel="See all crisis hotlines"
         hitSlop={8}
-        style={({ pressed }) => [styles.secondary, { opacity: pressed ? 0.6 : 1 }]}>
-        <Text style={[styles.secondaryText, { color: colors.crisis }]}>All lines</Text>
-        <Ionicons name="chevron-forward" size={16} color={colors.crisis} />
+        className="flex-row items-center px-2 py-2 active:opacity-60">
+        <Text className="text-[13px] font-bold text-crisis">All lines</Text>
+        <Icon name="ion:chevron-forward" size={16} className="text-crisis" />
       </Pressable>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  wrap: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: Spacing.two,
-    padding: Spacing.two,
-    borderRadius: Radius.lg,
-    borderWidth: StyleSheet.hairlineWidth,
-  },
-  primary: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: Spacing.two,
-    paddingVertical: Spacing.two,
-    paddingHorizontal: Spacing.three,
-    borderRadius: Radius.md,
-    minHeight: 52,
-  },
-  primaryTitle: { color: '#FFFFFF', fontSize: 15, fontWeight: '800' },
-  primarySub: { color: 'rgba(255,255,255,0.9)', fontSize: 12, fontWeight: '600' },
-  secondary: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: Spacing.two, paddingVertical: Spacing.two },
-  secondaryText: { fontSize: 13, fontWeight: '700' },
-});

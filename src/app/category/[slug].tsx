@@ -1,14 +1,29 @@
-import { Ionicons } from '@expo/vector-icons';
 import { useLocalSearchParams, useNavigation } from 'expo-router';
-import { useEffect, useState } from 'react';
-import { ActivityIndicator, Pressable, StyleSheet, Text, View } from 'react-native';
+import { useEffect, useMemo, useState } from 'react';
+import { ActivityIndicator, Pressable, Text, View } from 'react-native';
 
+import { HalfwayHouseCard } from '@/components/halfway-house-card';
+import { ResourceCard } from '@/components/resource-card';
+import { CommCorrFilters, ResourceFilters } from '@/components/resource-filters';
+import { ActionButton } from '@/components/ui/action-button';
+import { Icon } from '@/components/ui/icon';
 import { Screen } from '@/components/ui/screen';
-import { Radius, Spacing } from '@/constants/theme';
+import {
+  COMMCORR_FETCHED_AT,
+  PROGRAMS,
+  applyCommCorrFilters,
+  type CommCorrFilter,
+} from '@/data/commcorr';
+import {
+  RESOURCES_FETCHED_AT,
+  applyFilters,
+  resourcesForCategory,
+  type ResourceFilter,
+} from '@/data/resources';
 import { categoryBySlug } from '@/data/taxonomy';
 import { useTheme } from '@/hooks/use-theme';
 import { callNumber, openDirections, openUrl } from '@/lib/dial';
-import { REMERG_ORIGIN, fetchResources, type Resource } from '@/lib/remerg';
+import { REMERG_ORIGIN, fetchResources, type Resource as LiveResource } from '@/lib/remerg';
 
 export default function CategoryScreen() {
   const colors = useTheme();
@@ -16,9 +31,22 @@ export default function CategoryScreen() {
   const { slug } = useLocalSearchParams<{ slug: string }>();
   const category = categoryBySlug(slug);
 
-  const [resources, setResources] = useState<Resource[]>([]);
+  const [live, setLive] = useState<LiveResource[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [filters, setFilters] = useState<ResourceFilter[]>([]);
+  const [ccFilters, setCcFilters] = useState<CommCorrFilter[]>([]);
+
+  // Halfway houses come from DCJ and have their own shape, so they are matched
+  // first. Bundled SAMHSA data covers some of the rest; the remainder still
+  // depend on Remerg opening up their `resources` post type.
+  const programs = useMemo(() => (slug === 'halfway-houses' ? PROGRAMS : []), [slug]);
+  const shownPrograms = useMemo(
+    () => applyCommCorrFilters(programs, ccFilters),
+    [programs, ccFilters],
+  );
+  const bundled = useMemo(() => resourcesForCategory(slug ?? ''), [slug]);
+  const shown = useMemo(() => applyFilters(bundled, filters), [bundled, filters]);
 
   useEffect(() => {
     navigation.setOptions({ title: category?.name ?? 'Category' });
@@ -30,7 +58,7 @@ export default function CategoryScreen() {
     setLoading(true);
     fetchResources(slug).then((res) => {
       if (!alive) return;
-      setResources(res.data);
+      setLive(res.data);
       setError(res.error);
       setLoading(false);
     });
@@ -42,182 +70,124 @@ export default function CategoryScreen() {
   if (!category) {
     return (
       <Screen>
-        <Text style={[styles.h1, { color: colors.text }]}>Not found</Text>
+        <Text className="text-2xl font-extrabold text-ink">Not found</Text>
       </Screen>
     );
   }
 
+  const toggle = (f: ResourceFilter) =>
+    setFilters((cur) => (cur.includes(f) ? cur.filter((x) => x !== f) : [...cur, f]));
+  const toggleCc = (f: CommCorrFilter) =>
+    setCcFilters((cur) => (cur.includes(f) ? cur.filter((x) => x !== f) : [...cur, f]));
+
   return (
     <Screen>
-      <View style={[styles.hero, { backgroundColor: colors.backgroundElement }]}>
-        <Ionicons name={category.icon} size={28} color={colors.tint} />
-        <View style={{ flex: 1 }}>
-          <Text style={[styles.h1, { color: colors.text }]}>{category.name}</Text>
-          <Text style={[styles.blurb, { color: colors.textSecondary }]}>{category.blurb}</Text>
+      <View className="mb-3.5 flex-row items-center gap-3.5 rounded-card bg-elevated p-4">
+        <View className="h-14 w-14 items-center justify-center rounded-2xl bg-brand-soft">
+          <Icon name={category.icon} size={28} className="text-brand" />
+        </View>
+        <View className="flex-1">
+          <Text className="text-[22px] font-extrabold tracking-tight text-ink">{category.name}</Text>
+          <Text className="mt-0.5 text-[13px] leading-5 text-muted">{category.blurb}</Text>
         </View>
       </View>
 
-      {loading ? (
-        <View style={styles.center}>
-          <ActivityIndicator color={colors.tint} />
-          <Text style={[styles.centerText, { color: colors.textSecondary }]}>
-            Checking remerg.com…
+      {programs.length > 0 ? (
+        <>
+          <CommCorrFilters active={ccFilters} onToggle={toggleCc} />
+          <Text className="mb-2 text-xs font-bold text-muted">
+            {shownPrograms.length} of {programs.length}{' '}
+            {programs.length === 1 ? 'program' : 'programs'} statewide
           </Text>
+          {shownPrograms.map((p) => (
+            <HalfwayHouseCard key={p.id} program={p} />
+          ))}
+          {shownPrograms.length === 0 ? (
+            <Text className="py-6 text-center text-sm text-muted">
+              No program matches every filter. Try removing one.
+            </Text>
+          ) : null}
+          <Text className="mt-1 text-[11px] italic leading-4 text-muted">
+            Source: Colorado DCJ, Office of Community Corrections · pulled {COMMCORR_FETCHED_AT}.
+            Beds are assigned by your community corrections board — this list is who exists, not
+            who has space.
+          </Text>
+        </>
+      ) : bundled.length > 0 ? (
+        <>
+          <ResourceFilters active={filters} onToggle={toggle} />
+          <Text className="mb-2 text-xs font-bold text-muted">
+            {shown.length} {shown.length === 1 ? 'place' : 'places'} in Colorado
+          </Text>
+          {shown.map((r) => (
+            <ResourceCard key={r.id} resource={r} />
+          ))}
+          <Text className="mt-1 text-[11px] italic leading-4 text-muted">
+            Source: SAMHSA findtreatment.gov · pulled {RESOURCES_FETCHED_AT}. Call ahead to confirm
+            hours and intake.
+          </Text>
+        </>
+      ) : loading ? (
+        <View className="items-center gap-2 py-10">
+          <ActivityIndicator color={colors.tint} />
+          <Text className="text-sm text-muted">Checking remerg.com…</Text>
         </View>
-      ) : resources.length > 0 ? (
-        resources.map((r) => (
-          <View key={r.id} style={[styles.card, { borderColor: colors.border }]}>
-            <Text style={[styles.cardTitle, { color: colors.text }]}>{r.name}</Text>
-            {r.address ? (
-              <Text style={[styles.cardMeta, { color: colors.textSecondary }]}>{r.address}</Text>
-            ) : null}
-            {r.description ? (
-              <Text style={[styles.cardBody, { color: colors.textSecondary }]} numberOfLines={4}>
-                {r.description}
-              </Text>
-            ) : null}
-            <View style={styles.actions}>
+      ) : live.length > 0 ? (
+        live.map((r) => (
+          <View key={r.id} className="mb-3 rounded-card border border-line bg-surface p-3.5">
+            <Text className="text-[17px] font-bold text-ink">{r.name}</Text>
+            {r.address ? <Text className="mt-0.5 text-[13px] text-muted">{r.address}</Text> : null}
+            <View className="mt-3.5 flex-row flex-wrap gap-2">
               {r.phone ? (
-                <Action icon="call" label="Call" onPress={() => callNumber(r.phone!, r.name)} />
+                <ActionButton
+                  icon="mci:phone-in-talk"
+                  label="Call"
+                  primary
+                  onPress={() => callNumber(r.phone!, r.name)}
+                />
               ) : null}
               {r.address ? (
-                <Action
-                  icon="navigate"
+                <ActionButton
+                  icon="mci:navigation-variant"
                   label="Directions"
                   onPress={() => openDirections(r.address!, r.lat, r.lng)}
                 />
               ) : null}
               {r.website ? (
-                <Action icon="globe-outline" label="Website" onPress={() => openUrl(r.website!)} />
+                <ActionButton icon="mci:web" label="Website" onPress={() => openUrl(r.website!)} />
               ) : null}
             </View>
           </View>
         ))
       ) : (
-        /*
-         * Honest empty state.
-         *
-         * remerg.com registers the `resources` post type with the REST API but
-         * does not expose its records anonymously (X-WP-Total: 0), so there is
-         * genuinely nothing to list yet. Showing a permanent spinner or faking
-         * placeholder orgs would be worse than saying so and handing over a
-         * route that actually works right now.
-         */
-        <View style={[styles.emptyBox, { borderColor: colors.border, backgroundColor: colors.backgroundElement }]}>
-          <Ionicons name="lock-closed-outline" size={26} color={colors.textSecondary} />
-          <Text style={[styles.emptyTitle, { color: colors.text }]}>Listings aren&apos;t public yet</Text>
-          <Text style={[styles.emptyBody, { color: colors.textSecondary }]}>
-            Remerg keeps the {category.name.toLowerCase()} records behind a login on their website,
-            so this app can&apos;t pull them in yet. Two things that work right now:
+        <View className="items-center gap-2.5 rounded-card border border-line bg-elevated p-6">
+          <View className="h-14 w-14 items-center justify-center rounded-2xl bg-brand-soft">
+            <Icon name="mci:lock-outline" size={28} className="text-brand" />
+          </View>
+          <Text className="text-center text-[17px] font-bold text-ink">No public listings yet</Text>
+          <Text className="text-center text-sm leading-5 text-muted">
+            There is no open dataset for {category.name.toLowerCase()} in Colorado, and Remerg keeps
+            theirs behind a login. Two things that work right now:
           </Text>
-
           <Pressable
             onPress={() => callNumber('211', 'Colorado 211')}
             accessibilityRole="button"
-            style={({ pressed }) => [styles.primaryCta, { backgroundColor: colors.tint, opacity: pressed ? 0.85 : 1 }]}>
-            <Ionicons name="call" size={18} color={colors.onTint} />
-            <Text style={[styles.primaryCtaText, { color: colors.onTint }]}>
+            className="mt-1 min-h-touch w-full flex-row items-center justify-center gap-2 rounded-full bg-brand active:opacity-85">
+            <Icon name="mci:phone-in-talk" size={18} className="text-brand-on" />
+            <Text className="text-[15px] font-extrabold text-brand-on">
               Call 211 for a live search
             </Text>
           </Pressable>
-
           <Pressable
             onPress={() => openUrl(`${REMERG_ORIGIN}/resource-map/`)}
             accessibilityRole="button"
-            style={({ pressed }) => [styles.secondaryCta, { borderColor: colors.border, opacity: pressed ? 0.7 : 1 }]}>
-            <Ionicons name="open-outline" size={16} color={colors.text} />
-            <Text style={[styles.secondaryCtaText, { color: colors.text }]}>
-              Open the map on remerg.com
-            </Text>
+            className="min-h-touch w-full flex-row items-center justify-center gap-2 rounded-full border border-line active:opacity-70">
+            <Icon name="mci:open-in-new" size={16} className="text-ink" />
+            <Text className="text-sm font-bold text-ink">Open the map on remerg.com</Text>
           </Pressable>
-
-          {error ? (
-            <Text style={[styles.errorText, { color: colors.textSecondary }]}>{error}</Text>
-          ) : null}
+          {error ? <Text className="mt-1 text-[11px] text-muted">{error}</Text> : null}
         </View>
       )}
     </Screen>
   );
 }
-
-function Action({
-  icon,
-  label,
-  onPress,
-}: {
-  icon: React.ComponentProps<typeof Ionicons>['name'];
-  label: string;
-  onPress: () => void;
-}) {
-  const colors = useTheme();
-  return (
-    <Pressable
-      onPress={onPress}
-      accessibilityRole="button"
-      accessibilityLabel={label}
-      style={({ pressed }) => [
-        styles.action,
-        { backgroundColor: colors.backgroundElement, opacity: pressed ? 0.7 : 1 },
-      ]}>
-      <Ionicons name={icon} size={16} color={colors.tint} />
-      <Text style={[styles.actionText, { color: colors.text }]}>{label}</Text>
-    </Pressable>
-  );
-}
-
-const styles = StyleSheet.create({
-  hero: {
-    flexDirection: 'row',
-    gap: Spacing.three,
-    alignItems: 'center',
-    padding: Spacing.three,
-    borderRadius: Radius.lg,
-    marginBottom: Spacing.four,
-  },
-  h1: { fontSize: 22, fontWeight: '800', letterSpacing: -0.4 },
-  blurb: { fontSize: 13, lineHeight: 18, marginTop: 2 },
-  center: { alignItems: 'center', gap: Spacing.two, paddingVertical: Spacing.five },
-  centerText: { fontSize: 14 },
-  card: { borderWidth: StyleSheet.hairlineWidth, borderRadius: Radius.lg, padding: Spacing.three, marginBottom: Spacing.three },
-  cardTitle: { fontSize: 17, fontWeight: '700' },
-  cardMeta: { fontSize: 13, marginTop: 2 },
-  cardBody: { fontSize: 14, lineHeight: 20, marginTop: Spacing.two },
-  actions: { flexDirection: 'row', flexWrap: 'wrap', gap: Spacing.two, marginTop: Spacing.three },
-  action: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: Spacing.one,
-    paddingHorizontal: Spacing.three,
-    paddingVertical: Spacing.two,
-    borderRadius: Radius.pill,
-    minHeight: 40,
-  },
-  actionText: { fontSize: 14, fontWeight: '700' },
-  emptyBox: { alignItems: 'center', gap: Spacing.two, padding: Spacing.four, borderRadius: Radius.lg, borderWidth: StyleSheet.hairlineWidth },
-  emptyTitle: { fontSize: 17, fontWeight: '700', textAlign: 'center' },
-  emptyBody: { fontSize: 14, lineHeight: 20, textAlign: 'center' },
-  primaryCta: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: Spacing.two,
-    marginTop: Spacing.two,
-    paddingHorizontal: Spacing.four,
-    paddingVertical: Spacing.three,
-    borderRadius: Radius.pill,
-    alignSelf: 'stretch',
-  },
-  primaryCtaText: { fontSize: 15, fontWeight: '800' },
-  secondaryCta: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: Spacing.two,
-    paddingVertical: Spacing.three,
-    borderRadius: Radius.pill,
-    borderWidth: StyleSheet.hairlineWidth,
-    alignSelf: 'stretch',
-  },
-  secondaryCtaText: { fontSize: 14, fontWeight: '700' },
-  errorText: { fontSize: 11, marginTop: Spacing.one },
-});

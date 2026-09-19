@@ -1,9 +1,8 @@
-import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
-import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Pressable, Text, TextInput, View } from 'react-native';
 
+import { Icon } from '@/components/ui/icon';
 import { Screen } from '@/components/ui/screen';
-import { Radius, Spacing } from '@/constants/theme';
 import { AGE_RANGES, JUSTICE_STATUS, NEEDS } from '@/data/taxonomy';
 import { useTheme } from '@/hooks/use-theme';
 import { useProfile } from '@/lib/profile-context';
@@ -19,16 +18,16 @@ export default function PersonalizeScreen() {
 
   return (
     <Screen>
-      <View style={[styles.privacy, { backgroundColor: colors.accentSurface, borderColor: colors.accent }]}>
-        <Ionicons name="lock-closed" size={18} color={colors.accent} />
-        <Text style={[styles.privacyText, { color: colors.text }]}>
+      <View className="flex-row items-start gap-2.5 rounded-field border border-accent/40 bg-accent-soft p-3.5">
+        <Icon name="mci:lock-outline" size={18} className="text-accent" />
+        <Text className="flex-1 text-[13px] font-semibold leading-5 text-ink">
           Everything here stays on this phone. It is never uploaded, and you can skip all of it.
         </Text>
       </View>
 
-      <Text style={[styles.h2, { color: colors.text }]}>What do you need help with?</Text>
-      <Text style={[styles.sub, { color: colors.textSecondary }]}>Pick as many as apply.</Text>
-      <View style={styles.wrap}>
+      <Text className="mt-6 text-lg font-extrabold text-ink">What do you need help with?</Text>
+      <Text className="mt-1 text-[13px] leading-5 text-muted">Pick as many as apply.</Text>
+      <View className="mt-3.5 flex-row flex-wrap gap-2">
         {NEEDS.map((n) => {
           const on = profile.needs.includes(n.id);
           return (
@@ -38,19 +37,20 @@ export default function PersonalizeScreen() {
               accessibilityRole="checkbox"
               accessibilityState={{ checked: on }}
               accessibilityLabel={n.label}
-              style={[
-                styles.chip,
-                { backgroundColor: on ? colors.tint : colors.backgroundElement, borderColor: on ? colors.tint : colors.border },
-              ]}>
-              {on ? <Ionicons name="checkmark" size={15} color={colors.onTint} /> : null}
-              <Text style={[styles.chipText, { color: on ? colors.onTint : colors.text }]}>{n.short}</Text>
+              className={`min-h-[42px] flex-row items-center gap-1.5 rounded-full border px-3.5 active:opacity-75 ${
+                on ? 'border-brand bg-brand' : 'border-line bg-elevated'
+              }`}>
+              <Icon name={n.icon} size={16} className={on ? 'text-brand-on' : 'text-brand'} />
+              <Text className={`text-sm font-bold ${on ? 'text-brand-on' : 'text-ink'}`}>
+                {n.short}
+              </Text>
             </Pressable>
           );
         })}
       </View>
 
-      <Text style={[styles.h2, { color: colors.text }]}>Where are you in the process?</Text>
-      <View style={styles.list}>
+      <Text className="mt-6 text-lg font-extrabold text-ink">Where are you in the process?</Text>
+      <View className="mt-3.5 gap-2">
         {JUSTICE_STATUS.map((s) => {
           const on = profile.justiceStatus === s;
           return (
@@ -59,20 +59,22 @@ export default function PersonalizeScreen() {
               onPress={() => update({ justiceStatus: on ? null : s })}
               accessibilityRole="radio"
               accessibilityState={{ selected: on }}
-              style={[styles.option, { borderColor: on ? colors.tint : colors.border, backgroundColor: on ? colors.accentSurface : 'transparent' }]}>
-              <Ionicons
-                name={on ? 'radio-button-on' : 'radio-button-off'}
+              className={`min-h-touch flex-row items-center gap-2.5 rounded-field border px-3.5 active:opacity-75 ${
+                on ? 'border-brand bg-accent-soft' : 'border-line'
+              }`}>
+              <Icon
+                name={on ? 'mci:radiobox-marked' : 'mci:radiobox-blank'}
                 size={20}
-                color={on ? colors.tint : colors.textSecondary}
+                className={on ? 'text-brand' : 'text-muted'}
               />
-              <Text style={[styles.optionText, { color: colors.text }]}>{s}</Text>
+              <Text className="flex-1 py-3 text-sm leading-5 text-ink">{s}</Text>
             </Pressable>
           );
         })}
       </View>
 
-      <Text style={[styles.h2, { color: colors.text }]}>Age range</Text>
-      <View style={styles.wrap}>
+      <Text className="mt-6 text-lg font-extrabold text-ink">Age range</Text>
+      <View className="mt-3.5 flex-row flex-wrap gap-2">
         {AGE_RANGES.map((a) => {
           const on = profile.ageRange === a;
           return (
@@ -81,15 +83,17 @@ export default function PersonalizeScreen() {
               onPress={() => update({ ageRange: on ? null : a })}
               accessibilityRole="radio"
               accessibilityState={{ selected: on }}
-              style={[styles.chip, { backgroundColor: on ? colors.tint : colors.backgroundElement, borderColor: on ? colors.tint : colors.border }]}>
-              <Text style={[styles.chipText, { color: on ? colors.onTint : colors.text }]}>{a}</Text>
+              className={`min-h-[42px] justify-center rounded-full border px-4 active:opacity-75 ${
+                on ? 'border-brand bg-brand' : 'border-line bg-elevated'
+              }`}>
+              <Text className={`text-sm font-bold ${on ? 'text-brand-on' : 'text-ink'}`}>{a}</Text>
             </Pressable>
           );
         })}
       </View>
 
-      <Text style={[styles.h2, { color: colors.text }]}>ZIP code</Text>
-      <Text style={[styles.sub, { color: colors.textSecondary }]}>
+      <Text className="mt-6 text-lg font-extrabold text-ink">ZIP code</Text>
+      <Text className="mt-1 text-[13px] leading-5 text-muted">
         Used only to sort places by distance once listings are available.
       </Text>
       <TextInput
@@ -100,7 +104,7 @@ export default function PersonalizeScreen() {
         keyboardType="number-pad"
         maxLength={5}
         accessibilityLabel="ZIP code"
-        style={[styles.input, { color: colors.text, backgroundColor: colors.backgroundElement, borderColor: colors.border }]}
+        className="mt-3.5 h-[52px] rounded-field border border-line bg-elevated px-3.5 text-[17px] font-semibold text-ink"
       />
 
       <Pressable
@@ -109,57 +113,9 @@ export default function PersonalizeScreen() {
           router.back();
         }}
         accessibilityRole="button"
-        style={({ pressed }) => [styles.save, { backgroundColor: colors.tint, opacity: pressed ? 0.85 : 1 }]}>
-        <Text style={[styles.saveText, { color: colors.onTint }]}>Save to this phone</Text>
+        className="mt-8 min-h-touch items-center justify-center rounded-full bg-brand active:opacity-85">
+        <Text className="text-base font-extrabold text-brand-on">Save to this phone</Text>
       </Pressable>
     </Screen>
   );
 }
-
-const styles = StyleSheet.create({
-  privacy: {
-    flexDirection: 'row',
-    gap: Spacing.two,
-    alignItems: 'flex-start',
-    padding: Spacing.three,
-    borderRadius: Radius.md,
-    borderWidth: StyleSheet.hairlineWidth,
-  },
-  privacyText: { flex: 1, fontSize: 13, lineHeight: 19, fontWeight: '600' },
-  h2: { fontSize: 18, fontWeight: '800', marginTop: Spacing.four },
-  sub: { fontSize: 13, lineHeight: 19, marginTop: Spacing.one },
-  wrap: { flexDirection: 'row', flexWrap: 'wrap', gap: Spacing.two, marginTop: Spacing.three },
-  chip: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: Spacing.one,
-    paddingHorizontal: Spacing.three,
-    paddingVertical: Spacing.two,
-    borderRadius: Radius.pill,
-    borderWidth: StyleSheet.hairlineWidth,
-    minHeight: 40,
-  },
-  chipText: { fontSize: 14, fontWeight: '700' },
-  list: { gap: Spacing.two, marginTop: Spacing.three },
-  option: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: Spacing.two,
-    padding: Spacing.three,
-    borderRadius: Radius.md,
-    borderWidth: StyleSheet.hairlineWidth,
-    minHeight: 52,
-  },
-  optionText: { flex: 1, fontSize: 14, lineHeight: 19 },
-  input: {
-    marginTop: Spacing.three,
-    height: 52,
-    borderRadius: Radius.md,
-    borderWidth: StyleSheet.hairlineWidth,
-    paddingHorizontal: Spacing.three,
-    fontSize: 17,
-    fontWeight: '600',
-  },
-  save: { marginTop: Spacing.five, paddingVertical: Spacing.three, borderRadius: Radius.pill, alignItems: 'center' },
-  saveText: { fontSize: 16, fontWeight: '800' },
-});

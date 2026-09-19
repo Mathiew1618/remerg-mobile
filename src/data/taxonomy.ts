@@ -16,10 +16,9 @@
  * not necessarily know that maps to "Re-entry Orgs".
  */
 
-import type { ComponentProps } from 'react';
-import type { Ionicons } from '@expo/vector-icons';
+import type { IconName } from '@/components/ui/icon';
 
-export type IconName = ComponentProps<typeof Ionicons>['name'];
+export type { IconName };
 
 export type Need = {
   /** Matches the survey's `val_N` so answers post back unchanged. */
@@ -32,24 +31,31 @@ export type Need = {
   related: string[];
 };
 
-/** Survey field: sur_resources_needed[] */
+/**
+ * Survey field: sur_resources_needed[]
+ *
+ * Icons are the sign the service itself uses — an Rx for substance use, a
+ * hospital cross for health care, a badge for parole, a house for housing —
+ * so the grid is readable at a glance and by someone who reads slowly or not
+ * at all.
+ */
 export const NEEDS: Need[] = [
-  { id: 'val_0',  label: 'Housing',                                  short: 'Housing',      icon: 'home',                 related: ['halfway-houses', 're-entry-orgs'] },
-  { id: 'val_1',  label: 'Employment',                               short: 'Jobs',         icon: 'briefcase',            related: ['job-readiness'] },
-  { id: 'val_2',  label: 'Food',                                     short: 'Food',         icon: 'restaurant',           related: ['re-entry-orgs'] },
-  { id: 'val_3',  label: 'Transportation',                           short: 'Transport',    icon: 'bus',                  related: ['re-entry-orgs'] },
-  { id: 'val_4',  label: 'Mental health services',                   short: 'Mental health',icon: 'heart',                related: ['crisis-walk-in-centers'] },
-  { id: 'val_5',  label: 'Substance use treatment',                  short: 'Substance use',icon: 'medkit',               related: ['ua-sites', 'crisis-walk-in-centers'] },
-  { id: 'val_6',  label: 'ID / paperwork',                           short: 'ID & docs',    icon: 'card',                 related: ['re-entry-orgs'] },
-  { id: 'val_7',  label: 'Legal assistance',                         short: 'Legal',        icon: 'document-text',        related: ['re-entry-orgs'] },
-  { id: 'val_8',  label: 'Health care',                              short: 'Health care',  icon: 'medical',              related: ['crisis-walk-in-centers'] },
-  { id: 'val_9',  label: 'Benefits (Medicaid, SNAP, SSI/SSDI)',      short: 'Benefits',     icon: 'wallet',               related: ['re-entry-orgs'] },
-  { id: 'val_10', label: 'Education / training',                     short: 'Education',    icon: 'school',               related: ['job-readiness'] },
-  { id: 'val_11', label: 'Technology & phone access',                short: 'Phone & tech', icon: 'phone-portrait',       related: ['re-entry-orgs'] },
-  { id: 'val_12', label: 'Support with parole/probation conditions', short: 'Parole help',  icon: 'checkmark-circle',     related: ['parole-offices', 'ua-sites'] },
-  { id: 'val_13', label: 'Relationship or family support',           short: 'Family',       icon: 'people',               related: ['re-entry-orgs'] },
-  { id: 'val_14', label: 'Re-entry peer support',                    short: 'Peer support', icon: 'chatbubbles',          related: ['re-entry-orgs'] },
-  { id: 'val_15', label: 'Other',                                    short: 'Something else', icon: 'ellipsis-horizontal', related: [] },
+  { id: 'val_0',  label: 'Housing',                                  short: 'Housing',        icon: 'mci:home-city',               related: ['halfway-houses', 're-entry-orgs'] },
+  { id: 'val_1',  label: 'Employment',                               short: 'Jobs',           icon: 'mci:briefcase',               related: ['job-readiness'] },
+  { id: 'val_2',  label: 'Food',                                     short: 'Food',           icon: 'mci:silverware-fork-knife',   related: ['re-entry-orgs'] },
+  { id: 'val_3',  label: 'Transportation',                           short: 'Transport',      icon: 'mci:bus',                     related: ['re-entry-orgs'] },
+  { id: 'val_4',  label: 'Mental health services',                   short: 'Mental health',  icon: 'mci:brain',                   related: ['crisis-walk-in-centers'] },
+  { id: 'val_5',  label: 'Substance use treatment',                  short: 'Substance use',  icon: 'mci:prescription',            related: ['ua-sites', 'crisis-walk-in-centers'] },
+  { id: 'val_6',  label: 'ID / paperwork',                           short: 'ID & docs',      icon: 'mci:card-account-details',    related: ['re-entry-orgs'] },
+  { id: 'val_7',  label: 'Legal assistance',                         short: 'Legal',          icon: 'mci:scale-balance',           related: ['re-entry-orgs'] },
+  { id: 'val_8',  label: 'Health care',                              short: 'Health care',    icon: 'mci:hospital-box',            related: ['crisis-walk-in-centers'] },
+  { id: 'val_9',  label: 'Benefits (Medicaid, SNAP, SSI/SSDI)',      short: 'Benefits',       icon: 'mci:cash-multiple',           related: ['re-entry-orgs'] },
+  { id: 'val_10', label: 'Education / training',                     short: 'Education',      icon: 'mci:school',                  related: ['job-readiness'] },
+  { id: 'val_11', label: 'Technology & phone access',                short: 'Phone & tech',   icon: 'mci:cellphone',               related: ['re-entry-orgs'] },
+  { id: 'val_12', label: 'Support with parole/probation conditions', short: 'Parole help',    icon: 'mci:police-badge',            related: ['parole-offices', 'ua-sites'] },
+  { id: 'val_13', label: 'Relationship or family support',           short: 'Family',         icon: 'mci:human-male-female-child', related: ['re-entry-orgs'] },
+  { id: 'val_14', label: 'Re-entry peer support',                    short: 'Peer support',   icon: 'mci:hand-heart',              related: ['re-entry-orgs'] },
+  { id: 'val_15', label: 'Other',                                    short: 'Something else', icon: 'mci:dots-horizontal',         related: [] },
 ];
 
 export type MapCategory = {
@@ -63,12 +69,12 @@ export type MapCategory = {
 
 /** WordPress taxonomy: map_categories */
 export const MAP_CATEGORIES: MapCategory[] = [
-  { termId: 993, slug: 'crisis-walk-in-centers', name: 'Crisis Walk-in Centers', icon: 'medical',          blurb: 'Walk in without an appointment when things are bad.' },
-  { termId: 992, slug: 'halfway-houses',         name: 'Halfway Houses',         icon: 'home',             blurb: 'Community corrections and transitional housing.' },
-  { termId: 991, slug: 'job-readiness',          name: 'Job Readiness',          icon: 'briefcase',        blurb: 'Training, résumé help and fair-chance employers.' },
-  { termId: 990, slug: 'parole-offices',         name: 'Parole Offices',         icon: 'business',         blurb: 'Find the office handling your supervision.' },
-  { termId: 989, slug: 're-entry-orgs',          name: 'Re-entry Orgs',          icon: 'people',           blurb: 'Nonprofits that help with the whole transition.' },
-  { termId: 988, slug: 'ua-sites',               name: 'UA Sites',               icon: 'flask',            blurb: 'Urinalysis testing locations for your conditions.' },
+  { termId: 993, slug: 'crisis-walk-in-centers', name: 'Crisis Walk-in Centers', icon: 'mci:hospital-box',     blurb: 'Walk in without an appointment when things are bad.' },
+  { termId: 992, slug: 'halfway-houses',         name: 'Halfway Houses',         icon: 'mci:home-group',       blurb: 'Community corrections and transitional housing.' },
+  { termId: 991, slug: 'job-readiness',          name: 'Job Readiness',          icon: 'mci:briefcase-search', blurb: 'Training, résumé help and fair-chance employers.' },
+  { termId: 990, slug: 'parole-offices',         name: 'Parole Offices',         icon: 'mci:police-badge',     blurb: 'Find the office handling your supervision.' },
+  { termId: 989, slug: 're-entry-orgs',          name: 'Re-entry Orgs',          icon: 'mci:handshake',        blurb: 'Nonprofits that help with the whole transition.' },
+  { termId: 988, slug: 'ua-sites',               name: 'UA Sites',               icon: 'mci:test-tube',        blurb: 'Urinalysis testing locations for your conditions.' },
 ];
 
 /** Survey field: sur_description — how the person relates to the system. */

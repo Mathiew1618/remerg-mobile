@@ -1,42 +1,40 @@
 import type { ReactNode } from 'react';
-import { ScrollView, StyleSheet, View, type ViewStyle } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-
-import { MaxContentWidth, Spacing } from '@/constants/theme';
-import { useTheme } from '@/hooks/use-theme';
 
 type Props = {
   children: ReactNode;
   scroll?: boolean;
-  /** Extra bottom padding so content clears the tab bar. */
-  contentStyle?: ViewStyle;
+  /** Extra classes for the content container. */
+  contentClassName?: string;
 };
 
-export function Screen({ children, scroll = true, contentStyle }: Props) {
-  const colors = useTheme();
+/**
+ * Page shell: themed background, centered max-width column, and enough bottom
+ * padding to clear the tab bar and the home indicator.
+ *
+ * The bottom inset is the one value that has to come from JS — everything else
+ * is a class.
+ */
+export function Screen({ children, scroll = true, contentClassName = '' }: Props) {
   const insets = useSafeAreaInsets();
-
-  const inner: ViewStyle = {
-    padding: Spacing.three,
-    paddingBottom: insets.bottom + Spacing.six,
-    maxWidth: MaxContentWidth,
-    width: '100%',
-    alignSelf: 'center',
-    ...contentStyle,
-  };
+  const inner = `w-full self-center max-w-content p-4 ${contentClassName}`;
 
   if (!scroll) {
-    return <View style={[styles.fill, { backgroundColor: colors.background }, inner]}>{children}</View>;
+    return (
+      <View className={`flex-1 bg-surface ${inner}`} style={{ paddingBottom: insets.bottom + 64 }}>
+        {children}
+      </View>
+    );
   }
 
   return (
     <ScrollView
-      style={[styles.fill, { backgroundColor: colors.background }]}
-      contentContainerStyle={inner}
+      className="flex-1 bg-surface"
+      contentContainerClassName={inner}
+      contentContainerStyle={{ paddingBottom: insets.bottom + 64 }}
       keyboardShouldPersistTaps="handled">
       {children}
     </ScrollView>
   );
 }
-
-const styles = StyleSheet.create({ fill: { flex: 1 } });
