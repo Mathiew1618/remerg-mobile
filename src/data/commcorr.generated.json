@@ -1,0 +1,1021 @@
+{
+ "source": "Colorado Division of Criminal Justice, Office of Community Corrections",
+ "sourceUrl": "https://dcj.colorado.gov/dcj-offices/occ/corrections-boards-programs",
+ "fetchedAt": "2026-09-19",
+ "state": "CO",
+ "count": 25,
+ "resources": [
+  {
+   "id": "dcj-advantage-alamosa-81101",
+   "source": "dcj",
+   "kinds": [
+    "housing"
+   ],
+   "name": "Advantage Treatment Center - Alamosa",
+   "subtitle": "12th Judicial District - Alamosa, Conejos, Costilla, Mineral, Rio Grande & Saguache County",
+   "address": "2255 Lava Lane",
+   "city": "Alamosa",
+   "state": "CO",
+   "zip": "81101",
+   "phone": "719-589-7500",
+   "email": null,
+   "website": null,
+   "director": "Antonio Ornelas",
+   "lat": 37.449259041167,
+   "lng": -105.869324326691,
+   "flags": {
+    "justiceInvolved": true,
+    "men": true,
+    "women": true,
+    "acceptsSexOffense": true,
+    "acceptsViolentOffense": true,
+    "dualDiagnosis": false,
+    "residentialTreatment": true
+   },
+   "tracks": [
+    {
+     "track": "IRT",
+     "length": "90 Days",
+     "substanceAbuse": "SOA-R Level 4c",
+     "mentalHealth": "P1 - P3 Preferred",
+     "medical": "M1 - M2 Preferred",
+     "sexOffenders": "Yes",
+     "violentOffenders": "Will consider in Jurisdiction only",
+     "notes": "*Must have medications upon intake, Will consider all referrals"
+    },
+    {
+     "track": "SOSTCC",
+     "length": "Open Ended",
+     "substanceAbuse": null,
+     "mentalHealth": "P1 - P3",
+     "medical": null,
+     "sexOffenders": null,
+     "violentOffenders": "Will Be Considered",
+     "notes": "Accepts determinate and indeterminate sentences"
+    }
+   ],
+   "populationServed": "Male/Female"
+  },
+  {
+   "id": "dcj-advantage-durango-81301",
+   "source": "dcj",
+   "kinds": [
+    "housing"
+   ],
+   "name": "Advantage Treatment Center - Durango",
+   "subtitle": "6th Judicial District - La Plata, San Juan, & Archuleta County",
+   "address": "1050 Avenida Del Sol",
+   "city": "Durango",
+   "state": "CO",
+   "zip": "81301",
+   "phone": "970-247-1342",
+   "email": null,
+   "website": null,
+   "director": "Sally Frey",
+   "lat": null,
+   "lng": null,
+   "flags": {
+    "justiceInvolved": true,
+    "men": true,
+    "women": true,
+    "acceptsSexOffense": false,
+    "acceptsViolentOffense": false,
+    "dualDiagnosis": false,
+    "residentialTreatment": false
+   },
+   "tracks": [],
+   "populationServed": "Male/Female"
+  },
+  {
+   "id": "dcj-advantage-lamar-81052",
+   "source": "dcj",
+   "kinds": [
+    "housing"
+   ],
+   "name": "Advantage Treatment Center - Lamar",
+   "subtitle": "15th Judicial District - Baca, Cheyenne, Kiowa & Prowers County",
+   "address": "800 E. Maple St.",
+   "city": "Lamar",
+   "state": "CO",
+   "zip": "81052",
+   "phone": "719-336-0650",
+   "email": null,
+   "website": null,
+   "director": "Marci Amrine",
+   "lat": 38.091934422649,
+   "lng": -102.628855264189,
+   "flags": {
+    "justiceInvolved": true,
+    "men": true,
+    "women": true,
+    "acceptsSexOffense": true,
+    "acceptsViolentOffense": false,
+    "dualDiagnosis": false,
+    "residentialTreatment": true
+   },
+   "tracks": [
+    {
+     "track": "IRT",
+     "length": "90 Days",
+     "substanceAbuse": "SOA-R Level 4c",
+     "mentalHealth": "P1 - P3 Preferred",
+     "medical": "M1 - M2 Preferred",
+     "sexOffenders": "Yes",
+     "violentOffenders": "Will consider in Jurisdiction only",
+     "notes": "*Must have medications upon intake, Will consider all referrals"
+    },
+    {
+     "track": "SOSTCC",
+     "length": "Open Ended",
+     "substanceAbuse": null,
+     "mentalHealth": "P1 - P3",
+     "medical": null,
+     "sexOffenders": null,
+     "violentOffenders": "-",
+     "notes": "Awaiting Board Approval"
+    }
+   ],
+   "populationServed": "Male"
+  },
+  {
+   "id": "dcj-advantage-montrose-81401",
+   "source": "dcj",
+   "kinds": [
+    "housing"
+   ],
+   "name": "Advantage Treatment Center - Montrose",
+   "subtitle": "7th Judicial District - Montrose, Delta, Gunnison, San Miguel, Ouray & Hinsdale County",
+   "address": "1230 N Grand Ave",
+   "city": "Montrose",
+   "state": "CO",
+   "zip": "81401",
+   "phone": "970-964-2777",
+   "email": null,
+   "website": null,
+   "director": "Tyson Berry",
+   "lat": 38.489174653636,
+   "lng": -107.890252211227,
+   "flags": {
+    "justiceInvolved": true,
+    "men": true,
+    "women": true,
+    "acceptsSexOffense": false,
+    "acceptsViolentOffense": false,
+    "dualDiagnosis": false,
+    "residentialTreatment": false
+   },
+   "tracks": [],
+   "populationServed": "Male/Female"
+  },
+  {
+   "id": "dcj-advantage-sterling-80751",
+   "source": "dcj",
+   "kinds": [
+    "housing"
+   ],
+   "name": "Advantage Treatment Center - Sterling",
+   "subtitle": "13th Judicial District - Kit Carson, Logan Morgan, Phillips, Sedgwick, Washington & Yuma County",
+   "address": "12220 Highway 61",
+   "city": "Sterling",
+   "state": "CO",
+   "zip": "80751",
+   "phone": "970-522-7383",
+   "email": null,
+   "website": null,
+   "director": "Sam Lambert",
+   "lat": 40.614382450535,
+   "lng": -103.159063658299,
+   "flags": {
+    "justiceInvolved": true,
+    "men": true,
+    "women": false,
+    "acceptsSexOffense": true,
+    "acceptsViolentOffense": true,
+    "dualDiagnosis": false,
+    "residentialTreatment": true
+   },
+   "tracks": [
+    {
+     "track": "IRT",
+     "length": "90 Days",
+     "substanceAbuse": "SOA-R Level 4c",
+     "mentalHealth": "P1 - P3*",
+     "medical": "M1 - M2 Preferred",
+     "sexOffenders": "Yes",
+     "violentOffenders": "Will consider in Jurisdiction only",
+     "notes": "*Must have medications upon intake, Will consider all referrals"
+    },
+    {
+     "track": "SOSTCC",
+     "length": "Open Ended",
+     "substanceAbuse": null,
+     "mentalHealth": "P1 - P3",
+     "medical": null,
+     "sexOffenders": null,
+     "violentOffenders": "Will Be Considered",
+     "notes": "Accepts determinate and indeterminate sentences"
+    }
+   ],
+   "populationServed": "Male"
+  },
+  {
+   "id": "dcj-comcor-embrave-80907",
+   "source": "dcj",
+   "kinds": [
+    "housing"
+   ],
+   "name": "ComCor Inc./EMBRAVE",
+   "subtitle": "4th Judicial District - Teller & El Paso County",
+   "address": "3615 Roberts Rd.",
+   "city": "Colorado Springs",
+   "state": "CO",
+   "zip": "80907",
+   "phone": "719-473-4460",
+   "email": null,
+   "website": null,
+   "director": "Mark Wester",
+   "lat": 38.88363903583,
+   "lng": -104.818065268176,
+   "flags": {
+    "justiceInvolved": true,
+    "men": true,
+    "women": true,
+    "acceptsSexOffense": true,
+    "acceptsViolentOffense": true,
+    "dualDiagnosis": true,
+    "residentialTreatment": true
+   },
+   "tracks": [
+    {
+     "track": "IRT",
+     "length": "90 Days",
+     "substanceAbuse": "SOA-R Level 4c",
+     "mentalHealth": "P1 - P3 Preferred",
+     "medical": "M1 - M2 Preferred",
+     "sexOffenders": "On case by case",
+     "violentOffenders": "Yes",
+     "notes": "*Must have 90 day supply of medication upon intake"
+    },
+    {
+     "track": "SOSTCC",
+     "length": "6 - 12 months",
+     "substanceAbuse": null,
+     "mentalHealth": "-",
+     "medical": null,
+     "sexOffenders": null,
+     "violentOffenders": "Will Be Considered",
+     "notes": "Accepts determinate and indeterminate sentences. DOC Case Mgr and SOTP Team sends referral"
+    },
+    {
+     "track": "RDDT",
+     "length": "Open Ended",
+     "substanceAbuse": "SOA-R Level 4a - 4d",
+     "mentalHealth": "P3 - P4",
+     "medical": null,
+     "sexOffenders": "Will be considered",
+     "violentOffenders": "Will be considered",
+     "notes": "Phone/in-person interview required"
+    }
+   ],
+   "populationServed": "Male/Female"
+  },
+  {
+   "id": "dcj-adams-corecivic-80216",
+   "source": "dcj",
+   "kinds": [
+    "housing"
+   ],
+   "name": "CoreCivic - Adams Transitional Center",
+   "subtitle": "17th Judicial District - Broomfield & Adams County",
+   "address": "1450 E. 62nd Ave",
+   "city": "Denver",
+   "state": "CO",
+   "zip": "80216",
+   "phone": "720-377-0900",
+   "email": null,
+   "website": null,
+   "director": "Mike Gardner",
+   "lat": 39.809082509411,
+   "lng": -104.971005883041,
+   "flags": {
+    "justiceInvolved": true,
+    "men": true,
+    "women": false,
+    "acceptsSexOffense": false,
+    "acceptsViolentOffense": false,
+    "dualDiagnosis": false,
+    "residentialTreatment": false
+   },
+   "tracks": [],
+   "populationServed": "Male"
+  },
+  {
+   "id": "dcj-arapahoe-corecivic-80110",
+   "source": "dcj",
+   "kinds": [
+    "housing"
+   ],
+   "name": "CoreCivic - Arapahoe Community Treatment Center",
+   "subtitle": "18th Judicial District - Arapahoe, Douglas, Elbert & Lincoln County",
+   "address": "3265 W. Girard Ave",
+   "city": "Englewood",
+   "state": "CO",
+   "zip": "80110",
+   "phone": "303-761-7685",
+   "email": null,
+   "website": null,
+   "director": "Victoria Longstrom",
+   "lat": 39.655364891003,
+   "lng": -105.02913581482,
+   "flags": {
+    "justiceInvolved": true,
+    "men": true,
+    "women": false,
+    "acceptsSexOffense": true,
+    "acceptsViolentOffense": true,
+    "dualDiagnosis": false,
+    "residentialTreatment": false
+   },
+   "tracks": [
+    {
+     "track": "SOSTCC",
+     "length": "Opened Ended",
+     "substanceAbuse": null,
+     "mentalHealth": "-",
+     "medical": null,
+     "sexOffenders": null,
+     "violentOffenders": "Will be considered",
+     "notes": "Accepts determinate and indeterminate sentences"
+    }
+   ],
+   "populationServed": "Male"
+  },
+  {
+   "id": "dcj-centennial-corecivic-80112",
+   "source": "dcj",
+   "kinds": [
+    "housing"
+   ],
+   "name": "CoreCivic - Centennial Community Transition Center",
+   "subtitle": "18th Judicial District - Arapahoe, Douglas, Elbert & Lincoln County",
+   "address": "14485 E. Fremont Ave",
+   "city": "Englewood",
+   "state": "CO",
+   "zip": "80112",
+   "phone": "303-627-0987",
+   "email": null,
+   "website": null,
+   "director": "Ericka Gillespie",
+   "lat": 39.584907746233,
+   "lng": -104.822676175843,
+   "flags": {
+    "justiceInvolved": true,
+    "men": true,
+    "women": false,
+    "acceptsSexOffense": false,
+    "acceptsViolentOffense": false,
+    "dualDiagnosis": false,
+    "residentialTreatment": false
+   },
+   "tracks": [],
+   "populationServed": "Male"
+  },
+  {
+   "id": "dcj-commerce-corecivic-80022",
+   "source": "dcj",
+   "kinds": [
+    "housing"
+   ],
+   "name": "CoreCivic - Commerce Transitional Center",
+   "subtitle": "17th Judicial District - Broomfield & Adams County",
+   "address": "4901 Krameria St.",
+   "city": "Commerce City",
+   "state": "CO",
+   "zip": "80022",
+   "phone": "720-407-8061",
+   "email": null,
+   "website": null,
+   "director": "Melissa Torres",
+   "lat": 39.78559098065,
+   "lng": -104.916823394463,
+   "flags": {
+    "justiceInvolved": true,
+    "men": true,
+    "women": false,
+    "acceptsSexOffense": false,
+    "acceptsViolentOffense": false,
+    "dualDiagnosis": false,
+    "residentialTreatment": false
+   },
+   "tracks": [],
+   "populationServed": "Male"
+  },
+  {
+   "id": "dcj-garfield-81650",
+   "source": "dcj",
+   "kinds": [
+    "housing"
+   ],
+   "name": "Garfield County Community Corrections",
+   "subtitle": "9th Judicial District - Rio Blanco, Garfield & Pitkin County",
+   "address": "0224 County Rd. 333A",
+   "city": "Rifle",
+   "state": "CO",
+   "zip": "81650",
+   "phone": "970-625-0334 ext. 100",
+   "email": null,
+   "website": null,
+   "director": "Travis Horton",
+   "lat": null,
+   "lng": null,
+   "flags": {
+    "justiceInvolved": true,
+    "men": true,
+    "women": true,
+    "acceptsSexOffense": false,
+    "acceptsViolentOffense": false,
+    "dualDiagnosis": false,
+    "residentialTreatment": false
+   },
+   "tracks": [],
+   "populationServed": "Male/Female"
+  },
+  {
+   "id": "dcj-arapahoe-geo-80120",
+   "source": "dcj",
+   "kinds": [
+    "housing"
+   ],
+   "name": "GEO - Arapahoe County Residential Center",
+   "subtitle": "18th Judicial District - Arapahoe, Douglas, Elbert & Lincoln County",
+   "address": "2135 W. Chenango Ave",
+   "city": "Littleton",
+   "state": "CO",
+   "zip": "80120",
+   "phone": "303-795-6975",
+   "email": null,
+   "website": null,
+   "director": "Angie Phebus",
+   "lat": 39.627833893725,
+   "lng": -105.013541896982,
+   "flags": {
+    "justiceInvolved": true,
+    "men": true,
+    "women": true,
+    "acceptsSexOffense": false,
+    "acceptsViolentOffense": false,
+    "dualDiagnosis": false,
+    "residentialTreatment": false
+   },
+   "tracks": [],
+   "populationServed": "Female/Male"
+  },
+  {
+   "id": "dcj-alternatives-geo-paso-80906",
+   "source": "dcj",
+   "kinds": [
+    "housing"
+   ],
+   "name": "GEO - Community Alternatives of El Paso County, Inc",
+   "subtitle": "4th Judicial District - Teller & El Paso County",
+   "address": "2945 E. Las Vegas St.",
+   "city": "Colorado Springs",
+   "state": "CO",
+   "zip": "80906",
+   "phone": "719-318-5586",
+   "email": "steven.owens@geogroup.com",
+   "website": null,
+   "director": "Steven Owens",
+   "lat": 38.782316905547,
+   "lng": -104.774102748095,
+   "flags": {
+    "justiceInvolved": true,
+    "men": true,
+    "women": true,
+    "acceptsSexOffense": true,
+    "acceptsViolentOffense": true,
+    "dualDiagnosis": false,
+    "residentialTreatment": true
+   },
+   "tracks": [
+    {
+     "track": "IRT",
+     "length": "90 Days",
+     "substanceAbuse": "SOA-R Level 4c",
+     "mentalHealth": "P1 - P3*",
+     "medical": "M1 - M2*",
+     "sexOffenders": "Yes",
+     "violentOffenders": "Will consider in Jurisdiction only",
+     "notes": "Not Currently Accepting Clients"
+    },
+    {
+     "track": "SOSTCC",
+     "length": "Opened Ended",
+     "substanceAbuse": null,
+     "mentalHealth": "-",
+     "medical": null,
+     "sexOffenders": null,
+     "violentOffenders": "Will be Considered-",
+     "notes": "Accepts determinate and indeterminate sentences"
+    }
+   ],
+   "populationServed": "Male/Female"
+  },
+  {
+   "id": "dcj-adams-iccs-80640",
+   "source": "dcj",
+   "kinds": [
+    "housing"
+   ],
+   "name": "ICCS - Adams",
+   "subtitle": "17th Judicial District - Broomfield & Adams County",
+   "address": "8031 I-76 Service Rd",
+   "city": "Henderson",
+   "state": "CO",
+   "zip": "80640",
+   "phone": "720-523-7463",
+   "email": null,
+   "website": null,
+   "director": "Jessica Fields",
+   "lat": 39.842113118213,
+   "lng": -104.92889528344,
+   "flags": {
+    "justiceInvolved": true,
+    "men": true,
+    "women": true,
+    "acceptsSexOffense": true,
+    "acceptsViolentOffense": true,
+    "dualDiagnosis": true,
+    "residentialTreatment": false
+   },
+   "tracks": [
+    {
+     "track": "SOSTCC",
+     "length": "Open Ended",
+     "substanceAbuse": null,
+     "mentalHealth": "-",
+     "medical": null,
+     "sexOffenders": null,
+     "violentOffenders": "Yes",
+     "notes": "Accepts determinate and indeterminate sentences"
+    },
+    {
+     "track": "RDDT",
+     "length": "Open Ended",
+     "substanceAbuse": "SOA-R Level 4a - 4d",
+     "mentalHealth": "P3 - P4",
+     "medical": null,
+     "sexOffenders": "Will be considered",
+     "violentOffenders": "Will be considered",
+     "notes": null
+    }
+   ],
+   "populationServed": "Male/Female"
+  },
+  {
+   "id": "dcj-impact-80239",
+   "source": "dcj",
+   "kinds": [
+    "housing"
+   ],
+   "name": "IMPACT Center",
+   "subtitle": "2nd Judicial District - Denver County",
+   "address": "10500 Smith Road",
+   "city": "Denver",
+   "state": "CO",
+   "zip": "80239",
+   "phone": "720-913-3825",
+   "email": null,
+   "website": null,
+   "director": "Maxwell Abagulum",
+   "lat": 39.768438112713,
+   "lng": -104.86572225575,
+   "flags": {
+    "justiceInvolved": true,
+    "men": true,
+    "women": false,
+    "acceptsSexOffense": false,
+    "acceptsViolentOffense": false,
+    "dualDiagnosis": false,
+    "residentialTreatment": false
+   },
+   "tracks": [],
+   "populationServed": "Male"
+  },
+  {
+   "id": "dcj-house-independence-pecos-80218",
+   "source": "dcj",
+   "kinds": [
+    "housing"
+   ],
+   "name": "Independence House Pecos",
+   "subtitle": "2nd Judicial District - Denver County",
+   "address": "4101 Pecos St.",
+   "city": "Denver",
+   "state": "CO",
+   "zip": "80218",
+   "phone": "303-455-7667",
+   "email": null,
+   "website": null,
+   "director": "Jennifer Tegart",
+   "lat": null,
+   "lng": null,
+   "flags": {
+    "justiceInvolved": true,
+    "men": true,
+    "women": false,
+    "acceptsSexOffense": false,
+    "acceptsViolentOffense": false,
+    "dualDiagnosis": false,
+    "residentialTreatment": false
+   },
+   "tracks": [],
+   "populationServed": "Male"
+  },
+  {
+   "id": "dcj-intervention-jefferson-80214",
+   "source": "dcj",
+   "kinds": [
+    "housing"
+   ],
+   "name": "Intervention Community Corrections Services - Jefferson",
+   "subtitle": "1st Judicial District - Gilpin and Jefferson County",
+   "address": "1651 Kendall St.",
+   "city": "Lakewood",
+   "state": "CO",
+   "zip": "80214",
+   "phone": "303-232-4002",
+   "email": null,
+   "website": null,
+   "director": "Josey Hall",
+   "lat": 39.743369191077,
+   "lng": -105.066196422981,
+   "flags": {
+    "justiceInvolved": true,
+    "men": true,
+    "women": true,
+    "acceptsSexOffense": true,
+    "acceptsViolentOffense": true,
+    "dualDiagnosis": true,
+    "residentialTreatment": false
+   },
+   "tracks": [
+    {
+     "track": "SOSTCC",
+     "length": "Minimum 12 months",
+     "substanceAbuse": null,
+     "mentalHealth": "-",
+     "medical": null,
+     "sexOffenders": null,
+     "violentOffenders": "Yes",
+     "notes": "Accepts determinate and indeterminate sentences"
+    },
+    {
+     "track": "RDDT",
+     "length": "Open Ended",
+     "substanceAbuse": "SOA-R Level 4a - 4d",
+     "mentalHealth": "P3 - P4",
+     "medical": null,
+     "sexOffenders": "Will be considered",
+     "violentOffenders": "Will be considered",
+     "notes": null
+    }
+   ],
+   "populationServed": "Male"
+  },
+  {
+   "id": "dcj-intervention-pueblo-81001",
+   "source": "dcj",
+   "kinds": [
+    "housing"
+   ],
+   "name": "Intervention Community Corrections Services - Pueblo",
+   "subtitle": "10th Judicial District - Pueblo County",
+   "address": "1901 N. Hudson Ave",
+   "city": "Pueblo",
+   "state": "CO",
+   "zip": "81001",
+   "phone": "719-569-3044",
+   "email": null,
+   "website": null,
+   "director": "Cecilia Kear",
+   "lat": 38.284687553368,
+   "lng": -104.595915359522,
+   "flags": {
+    "justiceInvolved": true,
+    "men": true,
+    "women": true,
+    "acceptsSexOffense": true,
+    "acceptsViolentOffense": true,
+    "dualDiagnosis": true,
+    "residentialTreatment": false
+   },
+   "tracks": [
+    {
+     "track": "RDDT",
+     "length": "Open Ended",
+     "substanceAbuse": "SOA-R Level 4a - 4d",
+     "mentalHealth": "P3 - P4",
+     "medical": null,
+     "sexOffenders": "Will be considered",
+     "violentOffenders": "Will be considered",
+     "notes": null
+    }
+   ],
+   "populationServed": "Male/Female"
+  },
+  {
+   "id": "dcj-intervention-weld-80631",
+   "source": "dcj",
+   "kinds": [
+    "housing"
+   ],
+   "name": "Intervention Community Corrections Services - Weld",
+   "subtitle": "19th Judicial District - Weld County",
+   "address": "1101 H Street",
+   "city": "Greeley",
+   "state": "CO",
+   "zip": "80631",
+   "phone": "970-584-2520",
+   "email": null,
+   "website": null,
+   "director": "Raquel DeNaeyer",
+   "lat": 40.444296119294,
+   "lng": -104.696914381034,
+   "flags": {
+    "justiceInvolved": true,
+    "men": true,
+    "women": true,
+    "acceptsSexOffense": true,
+    "acceptsViolentOffense": true,
+    "dualDiagnosis": true,
+    "residentialTreatment": false
+   },
+   "tracks": [
+    {
+     "track": "SOSTCC",
+     "length": "Minimum 12 months",
+     "substanceAbuse": null,
+     "mentalHealth": "-",
+     "medical": null,
+     "sexOffenders": null,
+     "violentOffenders": "Yes",
+     "notes": "Accepts determinate and indeterminate sentences"
+    },
+    {
+     "track": "RDDT",
+     "length": "Open Ended",
+     "substanceAbuse": "SOA-R Level 4a - 4d",
+     "mentalHealth": "P3 - P4",
+     "medical": null,
+     "sexOffenders": "Will be considered",
+     "violentOffenders": "Will be considered",
+     "notes": null
+    }
+   ],
+   "populationServed": "Male/Female"
+  },
+  {
+   "id": "dcj-intervention-west-80215",
+   "source": "dcj",
+   "kinds": [
+    "housing"
+   ],
+   "name": "Intervention Community Corrections Services - West",
+   "subtitle": "1st Judicial District - Gilpin and Jefferson County",
+   "address": "11500 W. Security Ave.",
+   "city": "Lakewood",
+   "state": "CO",
+   "zip": "80215",
+   "phone": "303-407-6200",
+   "email": null,
+   "website": null,
+   "director": "Judie Kunze",
+   "lat": 39.73732082697,
+   "lng": -105.126993754729,
+   "flags": {
+    "justiceInvolved": true,
+    "men": true,
+    "women": true,
+    "acceptsSexOffense": false,
+    "acceptsViolentOffense": false,
+    "dualDiagnosis": false,
+    "residentialTreatment": false
+   },
+   "tracks": [],
+   "populationServed": "Male/Female"
+  },
+  {
+   "id": "dcj-boulder-joe-pelle-80301",
+   "source": "dcj",
+   "kinds": [
+    "housing"
+   ],
+   "name": "Joe Pelle Center- Boulder County",
+   "subtitle": "20th Judicial District - Boulder County",
+   "address": "3260 Airport Rd",
+   "city": "Boulder",
+   "state": "CO",
+   "zip": "80301",
+   "phone": "970-449-2781",
+   "email": "thand@bouldercounty.gov",
+   "website": null,
+   "director": "Timothy Hand",
+   "lat": 40.034522077406,
+   "lng": -105.233533408247,
+   "flags": {
+    "justiceInvolved": true,
+    "men": true,
+    "women": true,
+    "acceptsSexOffense": false,
+    "acceptsViolentOffense": false,
+    "dualDiagnosis": false,
+    "residentialTreatment": false
+   },
+   "tracks": [],
+   "populationServed": "Male/Female"
+  },
+  {
+   "id": "dcj-larimer-80525",
+   "source": "dcj",
+   "kinds": [
+    "housing"
+   ],
+   "name": "Larimer County Residential Facility",
+   "subtitle": "8th Judicial District - Jackson & Larimer County",
+   "address": "2255 Midpoint Dr.",
+   "city": "Fort Collins",
+   "state": "CO",
+   "zip": "80525",
+   "phone": "970-498-7566",
+   "email": null,
+   "website": null,
+   "director": "Alexis Ongley",
+   "lat": 40.565310423026,
+   "lng": -105.035175108857,
+   "flags": {
+    "justiceInvolved": true,
+    "men": true,
+    "women": true,
+    "acceptsSexOffense": true,
+    "acceptsViolentOffense": true,
+    "dualDiagnosis": true,
+    "residentialTreatment": true
+   },
+   "tracks": [
+    {
+     "track": "IRT",
+     "length": "90 Days",
+     "substanceAbuse": "SOA-R Level 4c",
+     "mentalHealth": "P1-P3",
+     "medical": null,
+     "sexOffenders": "No",
+     "violentOffenders": "Will Be Considered",
+     "notes": "Adequate TABE & IQ Scores; Escape in past 2 years considered *Must have all prescription medications needed for 90 stay upon intake"
+    },
+    {
+     "track": "SOSTCC",
+     "length": "12 Months",
+     "substanceAbuse": null,
+     "mentalHealth": "P1-P2",
+     "medical": null,
+     "sexOffenders": null,
+     "violentOffenders": "Will Be Considered",
+     "notes": "Accepts determinate and indeterminate sentences"
+    },
+    {
+     "track": "RDDT",
+     "length": "Open (Approx. 150 Days)",
+     "substanceAbuse": "SOA-R Level 4a - 4d",
+     "mentalHealth": "P3-P4",
+     "medical": null,
+     "sexOffenders": "No",
+     "violentOffenders": "Will Be Considered",
+     "notes": "DOC - Accurate diagnosis and medication info OR MH referral with releases signed"
+    }
+   ],
+   "populationServed": "Male/Female"
+  },
+  {
+   "id": "dcj-mesa-81502",
+   "source": "dcj",
+   "kinds": [
+    "housing"
+   ],
+   "name": "Mesa County Community Corrections",
+   "subtitle": "21st Judicial District - Mesa County",
+   "address": "650 South Ave",
+   "city": "Grand Junction",
+   "state": "CO",
+   "zip": "81502",
+   "phone": "970-244-3301",
+   "email": null,
+   "website": null,
+   "director": "Nick Brutosky",
+   "lat": 39.063489215945,
+   "lng": -108.561636505004,
+   "flags": {
+    "justiceInvolved": true,
+    "men": true,
+    "women": true,
+    "acceptsSexOffense": true,
+    "acceptsViolentOffense": true,
+    "dualDiagnosis": true,
+    "residentialTreatment": true
+   },
+   "tracks": [
+    {
+     "track": "IRT",
+     "length": "90 Days",
+     "substanceAbuse": "SOA-R Level 4c",
+     "mentalHealth": "P3*",
+     "medical": "M-2",
+     "sexOffenders": "Yes",
+     "violentOffenders": "Yes",
+     "notes": "*Arrive with 90 days of medication"
+    },
+    {
+     "track": "SOSTCC",
+     "length": "Open Ended",
+     "substanceAbuse": null,
+     "mentalHealth": "P3-P4",
+     "medical": null,
+     "sexOffenders": null,
+     "violentOffenders": "Yes",
+     "notes": "Accepts determinate and indeterminate sentences, Conf. call needed for transition from DOC."
+    },
+    {
+     "track": "RDDT",
+     "length": "Open Ended",
+     "substanceAbuse": "SOA-R Level 4a - 4d",
+     "mentalHealth": "P3-P4",
+     "medical": null,
+     "sexOffenders": "Will be considered",
+     "violentOffenders": "Will Be Considered",
+     "notes": "Conf. call needed for transition from DOC to RDDT"
+    }
+   ],
+   "populationServed": "Male/Female"
+  },
+  {
+   "id": "dcj-moore-80216",
+   "source": "dcj",
+   "kinds": [
+    "housing"
+   ],
+   "name": "Moore Center",
+   "subtitle": "2nd Judicial District - Denver County",
+   "address": "570 West 44th Avenue",
+   "city": "Denver",
+   "state": "CO",
+   "zip": "80216",
+   "phone": "720-913-3825",
+   "email": null,
+   "website": null,
+   "director": "Carrie Barton",
+   "lat": 39.776550597403,
+   "lng": -104.99446334397,
+   "flags": {
+    "justiceInvolved": true,
+    "men": true,
+    "women": false,
+    "acceptsSexOffense": false,
+    "acceptsViolentOffense": false,
+    "dualDiagnosis": false,
+    "residentialTreatment": false
+   },
+   "tracks": [],
+   "populationServed": "Male"
+  },
+  {
+   "id": "dcj-elevate-project-80216",
+   "source": "dcj",
+   "kinds": [
+    "housing"
+   ],
+   "name": "Project: Elevate",
+   "subtitle": "2nd Judicial District - Denver County",
+   "address": "4280 Kearney St.",
+   "city": "Denver",
+   "state": "CO",
+   "zip": "80216",
+   "phone": "720-337-2240",
+   "email": "Lauren.Beaugh@denvergov.org",
+   "website": null,
+   "director": "Lauren Beaugh",
+   "lat": 39.776152454314,
+   "lng": -104.917545254413,
+   "flags": {
+    "justiceInvolved": true,
+    "men": false,
+    "women": true,
+    "acceptsSexOffense": false,
+    "acceptsViolentOffense": false,
+    "dualDiagnosis": false,
+    "residentialTreatment": false
+   },
+   "tracks": [],
+   "populationServed": "Female"
+  }
+ ]
+}

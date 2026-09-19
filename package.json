@@ -43,7 +43,10 @@
     "web": "expo start --web",
     "lint": "expo lint",
     "tunnel": "expo start --tunnel",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "ingest": "node scripts/ingest/samhsa.mjs && node scripts/ingest/commcorr.mjs",
+    "ingest:samhsa": "node scripts/ingest/samhsa.mjs",
+    "ingest:commcorr": "node scripts/ingest/commcorr.mjs"
   },
   "private": true
 }
