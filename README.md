@@ -119,6 +119,19 @@ codespace is ready to run. Two ways to see the app:
 Codespaces gives it an `https://<codespace>-8081.app.github.dev` address. For a realistic view,
 open browser devtools and switch on device emulation — this is a phone layout.
 
+#### If you see `sh: 1: expo: not found`
+
+`node_modules` isn't there yet. Either setup is still running, or it failed. Fix it in the
+codespace terminal:
+
+```bash
+npm ci && npm run web
+```
+
+The devcontainer now uses `updateContentCommand` with `waitFor`, which holds the terminal until the
+install finishes, so this shouldn't recur on a freshly rebuilt codespace. On an existing one, run
+**Codespaces: Rebuild Container** from the Command Palette to pick up the change.
+
 **Real phone via Expo Go (highest fidelity).** Plain `npx expo start` will not work: a codespace is
 not on your wifi, so the phone cannot reach Metro on a LAN address. Use the tunnel instead:
 

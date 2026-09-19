@@ -2,6 +2,13 @@
   "name": "Remerg Mobile (Expo)",
   "image": "mcr.microsoft.com/devcontainers/javascript-node:22",
 
+  "features": {
+    // The base javascript-node image has no SSH daemon, which makes
+    // `gh codespace ssh` and `gh codespace logs` fail. Without those there is
+    // no way to read the creation log when setup goes wrong.
+    "ghcr.io/devcontainers/features/sshd:1": { "version": "latest" }
+  },
+
   // Metro serves the web build and the Expo Go manifest on 8081. The 190xx
   // ports are Expo's legacy dev-server range; 8097 is React DevTools.
   "forwardPorts": [8081, 19000, 19001, 19006, 8097],
@@ -13,7 +20,13 @@
     "8097": { "label": "React DevTools" }
   },
 
-  "postCreateCommand": "npm install",
+  // `npm ci` installs straight from the committed lockfile: faster than
+  // `npm install` and it cannot silently resolve different versions.
+  // updateContentCommand runs during prebuild/creation and, unlike
+  // postCreateCommand, the terminal is not handed over until it finishes --
+  // so you can't start typing before node_modules exists.
+  "updateContentCommand": "npm ci",
+  "waitFor": "updateContentCommand",
 
   "customizations": {
     "vscode": {
@@ -27,11 +40,5 @@
         "typescript.tsdk": "node_modules/typescript/lib"
       }
     }
-  },
-
-  "remoteEnv": {
-    // Metro must listen on all interfaces for the Codespaces port forwarder to
-    // reach it; the default localhost bind is not forwardable.
-    "REACT_NATIVE_PACKAGER_HOSTNAME": "0.0.0.0"
   }
 }
