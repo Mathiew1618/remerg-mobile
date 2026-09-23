@@ -4,7 +4,7 @@ import { ActionButton } from '@/components/ui/action-button';
 import { Badge } from '@/components/ui/badge';
 import { Icon, type IconName } from '@/components/ui/icon';
 import type { Resource } from '@/data/resources';
-import { callNumber, openDirections, openUrl } from '@/lib/dial';
+import { callNumber, openPlace, openUrl } from '@/lib/dial';
 
 /** The sign the facility's own service uses: Rx, a brain, a hospital cross. */
 function kindIcon(kinds: string[]): IconName {
@@ -53,7 +53,7 @@ export function ResourceCard({ resource: r }: { resource: Resource }) {
           <ActionButton
             icon="mci:navigation-variant"
             label="Directions"
-            onPress={() => openDirections(`${r.name}, ${where}`, r.lat, r.lng)}
+            onPress={() => openPlace({ name: r.name, address: where, lat: r.lat, lng: r.lng, phone: r.phone, website: r.website })}
           />
         ) : null}
         {r.website ? (

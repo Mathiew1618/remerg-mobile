@@ -6,7 +6,7 @@
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "remerg",
-    "userInterfaceStyle": "automatic",
+    "userInterfaceStyle": "light",
     "ios": {
       "icon": "./assets/expo.icon",
       "bundleIdentifier": "com.remerg.mobile",
@@ -42,6 +42,12 @@
           "dark": {
             "backgroundColor": "#021638"
           }
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Remerg uses your location only when you ask for directions, to draw the route from where you are. It is not stored."
         }
       ]
     ],

@@ -5,7 +5,7 @@ import { ActionButton } from '@/components/ui/action-button';
 import { Badge } from '@/components/ui/badge';
 import { Icon } from '@/components/ui/icon';
 import { TRACK_LABELS, type CommCorrProgram } from '@/data/commcorr';
-import { callNumber, openDirections } from '@/lib/dial';
+import { callNumber, openPlace } from '@/lib/dial';
 
 /**
  * A community corrections program.
@@ -54,7 +54,7 @@ export function HalfwayHouseCard({ program: p }: { program: CommCorrProgram }) {
           <ActionButton
             icon="mci:navigation-variant"
             label="Directions"
-            onPress={() => openDirections(`${p.name}, ${where}`, p.lat, p.lng)}
+            onPress={() => openPlace({ name: p.name, address: where, lat: p.lat, lng: p.lng, phone: p.phone })}
           />
         ) : null}
         {hasDetail ? (

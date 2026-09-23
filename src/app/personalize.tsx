@@ -2,6 +2,7 @@ import { router } from 'expo-router';
 import { Pressable, Text, TextInput, View } from 'react-native';
 
 import { Icon } from '@/components/ui/icon';
+import { Band, BandHeading } from '@/components/ui/band';
 import { Screen } from '@/components/ui/screen';
 import { AGE_RANGES, JUSTICE_STATUS, NEEDS } from '@/data/taxonomy';
 import { useTheme } from '@/hooks/use-theme';
@@ -17,16 +18,17 @@ export default function PersonalizeScreen() {
   const { profile, update, toggleNeed } = useProfile();
 
   return (
-    <Screen>
-      <View className="flex-row items-start gap-2.5 rounded-field border border-accent/40 bg-accent-soft p-3.5">
-        <Icon name="mci:lock-outline" size={18} className="text-accent" />
+    <Screen bands>
+      <Band tone="green">
+      <View className="flex-row items-start gap-2.5 rounded-field bg-surface p-3.5">
+        <Icon name="mci:lock-outline" size={18} className="text-accent-ink" />
         <Text className="flex-1 text-[13px] font-semibold leading-5 text-ink">
           Everything here stays on this phone. It is never uploaded, and you can skip all of it.
         </Text>
       </View>
 
-      <Text className="mt-6 text-lg font-extrabold text-ink">What do you need help with?</Text>
-      <Text className="mt-1 text-[13px] leading-5 text-muted">Pick as many as apply.</Text>
+      <BandHeading tone="green" className="mb-1 mt-6">What do you need help with?</BandHeading>
+      <Text className="text-[13px] font-semibold leading-5 text-brand/80">Pick as many as apply.</Text>
       <View className="mt-3.5 flex-row flex-wrap gap-2">
         {NEEDS.map((n) => {
           const on = profile.needs.includes(n.id);
@@ -38,7 +40,7 @@ export default function PersonalizeScreen() {
               accessibilityState={{ checked: on }}
               accessibilityLabel={n.label}
               className={`min-h-[42px] flex-row items-center gap-1.5 rounded-full border px-3.5 active:opacity-75 ${
-                on ? 'border-brand bg-brand' : 'border-line bg-elevated'
+                on ? 'border-brand bg-brand' : 'border-transparent bg-surface'
               }`}>
               <Icon name={n.icon} size={16} className={on ? 'text-brand-on' : 'text-brand'} />
               <Text className={`text-sm font-bold ${on ? 'text-brand-on' : 'text-ink'}`}>
@@ -49,8 +51,11 @@ export default function PersonalizeScreen() {
         })}
       </View>
 
-      <Text className="mt-6 text-lg font-extrabold text-ink">Where are you in the process?</Text>
-      <View className="mt-3.5 gap-2">
+      </Band>
+
+      <Band tone="blue">
+      <BandHeading tone="blue">Where are you in the process?</BandHeading>
+      <View className="gap-2">
         {JUSTICE_STATUS.map((s) => {
           const on = profile.justiceStatus === s;
           return (
@@ -60,7 +65,7 @@ export default function PersonalizeScreen() {
               accessibilityRole="radio"
               accessibilityState={{ selected: on }}
               className={`min-h-touch flex-row items-center gap-2.5 rounded-field border px-3.5 active:opacity-75 ${
-                on ? 'border-brand bg-accent-soft' : 'border-line'
+                on ? 'border-accent bg-accent' : 'border-transparent bg-surface'
               }`}>
               <Icon
                 name={on ? 'mci:radiobox-marked' : 'mci:radiobox-blank'}
@@ -73,8 +78,8 @@ export default function PersonalizeScreen() {
         })}
       </View>
 
-      <Text className="mt-6 text-lg font-extrabold text-ink">Age range</Text>
-      <View className="mt-3.5 flex-row flex-wrap gap-2">
+      <BandHeading tone="blue" className="mt-6">Age range</BandHeading>
+      <View className="flex-row flex-wrap gap-2">
         {AGE_RANGES.map((a) => {
           const on = profile.ageRange === a;
           return (
@@ -84,15 +89,18 @@ export default function PersonalizeScreen() {
               accessibilityRole="radio"
               accessibilityState={{ selected: on }}
               className={`min-h-[42px] justify-center rounded-full border px-4 active:opacity-75 ${
-                on ? 'border-brand bg-brand' : 'border-line bg-elevated'
+                on ? 'border-accent bg-accent' : 'border-transparent bg-surface'
               }`}>
-              <Text className={`text-sm font-bold ${on ? 'text-brand-on' : 'text-ink'}`}>{a}</Text>
+              <Text className={`text-sm font-bold ${on ? 'text-brand' : 'text-ink'}`}>{a}</Text>
             </Pressable>
           );
         })}
       </View>
 
-      <Text className="mt-6 text-lg font-extrabold text-ink">ZIP code</Text>
+      </Band>
+
+      <Band tone="white">
+      <BandHeading tone="white" className="mb-1">ZIP code</BandHeading>
       <Text className="mt-1 text-[13px] leading-5 text-muted">
         Used only to sort places by distance once listings are available.
       </Text>
@@ -116,6 +124,7 @@ export default function PersonalizeScreen() {
         className="mt-8 min-h-touch items-center justify-center rounded-full bg-brand active:opacity-85">
         <Text className="text-base font-extrabold text-brand-on">Save to this phone</Text>
       </Pressable>
+      </Band>
     </Screen>
   );
 }

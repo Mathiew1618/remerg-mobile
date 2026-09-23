@@ -7,6 +7,8 @@ type Props = {
   scroll?: boolean;
   /** Extra classes for the content container. */
   contentClassName?: string;
+  /** Children are full-width <Band>s (green, blue, white) instead of one column. */
+  bands?: boolean;
 };
 
 /**
@@ -16,13 +18,27 @@ type Props = {
  * The bottom inset is the one value that has to come from JS — everything else
  * is a class.
  */
-export function Screen({ children, scroll = true, contentClassName = '' }: Props) {
+export function Screen({ children, scroll = true, contentClassName = '', bands = false }: Props) {
   const insets = useSafeAreaInsets();
   const inner = `w-full self-center max-w-content p-4 ${contentClassName}`;
 
+  // Banded pages (components/ui/band.tsx): each band is full-bleed and pads
+  // itself, so the scroll view adds no padding. Its background is white, the
+  // last band, so the space under the tab bar continues the final band.
+  if (bands) {
+    return (
+      <ScrollView
+        className="flex-1 bg-surface"
+        contentContainerStyle={{ paddingBottom: insets.bottom + 64 }}
+        keyboardShouldPersistTaps="handled">
+        {children}
+      </ScrollView>
+    );
+  }
+
   if (!scroll) {
     return (
-      <View className={`flex-1 bg-surface ${inner}`} style={{ paddingBottom: insets.bottom + 64 }}>
+      <View className={`flex-1 bg-canvas ${inner}`} style={{ paddingBottom: insets.bottom + 64 }}>
         {children}
       </View>
     );
@@ -30,7 +46,7 @@ export function Screen({ children, scroll = true, contentClassName = '' }: Props
 
   return (
     <ScrollView
-      className="flex-1 bg-surface"
+      className="flex-1 bg-canvas"
       contentContainerClassName={inner}
       contentContainerStyle={{ paddingBottom: insets.bottom + 64 }}
       keyboardShouldPersistTaps="handled">

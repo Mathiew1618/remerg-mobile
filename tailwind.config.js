@@ -17,11 +17,12 @@ const withOpacity = (variable) => `rgb(var(${variable}) / <alpha-value>)`;
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   presets: [require('nativewind/preset')],
-  // On native this follows the OS setting, matching the rest of the app.
-  darkMode: 'media',
+  // Light-only (see global.css): `dark:` variants never apply automatically.
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
+        canvas: withOpacity('--color-canvas'),
         surface: withOpacity('--color-surface'),
         elevated: withOpacity('--color-elevated'),
         selected: withOpacity('--color-selected'),
@@ -36,6 +37,7 @@ module.exports = {
         accent: {
           DEFAULT: withOpacity('--color-accent'),
           soft: withOpacity('--color-accent-soft'),
+          ink: withOpacity('--color-accent-ink'),
         },
         crisis: {
           DEFAULT: withOpacity('--color-crisis'),

@@ -1,6 +1,8 @@
+import { Image } from 'expo-image';
 import { Pressable, Text, View } from 'react-native';
 
 import { Icon, type IconName } from '@/components/ui/icon';
+import { Band } from '@/components/ui/band';
 import { Screen } from '@/components/ui/screen';
 import { openUrl } from '@/lib/dial';
 import { REMERG_ORIGIN } from '@/lib/remerg';
@@ -13,51 +15,60 @@ const STATS = [
 
 export default function AboutScreen() {
   return (
-    <Screen>
-      <Text className="text-[26px] font-extrabold leading-8 tracking-tight text-ink">
-        Ending recidivism in Colorado, one resource at a time.
-      </Text>
+    <Screen bands>
+      <Band tone="green">
+        <Text className="text-[28px] font-extrabold leading-9 tracking-tight text-brand">
+          Ending recidivism in Colorado, one resource at a time.
+        </Text>
+        <Image
+          source={require('../../assets/images/photos/helpline-call.jpg')}
+          style={{ width: '100%', aspectRatio: 3 / 2, borderRadius: 20, marginTop: 16 }}
+          contentFit="cover"
+          accessibilityLabel="A woman on a phone call"
+        />
+        <Text className="mt-4 text-[15px] font-semibold leading-6 text-brand">
+          Remerg is a 501(c)(3) founded to break down the barriers to re-entry and stop the revolving
+          door of recidivism. By connecting people leaving prison and jail with housing, employment
+          and community resources — when they need them — Remerg fosters agency and supports success.
+        </Text>
+      </Band>
 
-      <Text className="mt-3.5 text-[15px] leading-6 text-muted">
-        Remerg is a 501(c)(3) founded to break down the barriers to re-entry and stop the revolving
-        door of recidivism. By connecting people leaving prison and jail with housing, employment
-        and community resources — when they need them — Remerg fosters agency and supports success.
-      </Text>
+      <Band tone="blue">
+        <Text className="border-l-[3px] border-accent pl-3.5 text-[18px] font-bold italic leading-7 text-white">
+          There are enough barriers to starting over. Navigating resources shouldn&apos;t have to be
+          one of them.
+        </Text>
 
-      <Text className="mt-6 border-l-[3px] border-accent pl-3.5 text-[17px] font-semibold italic leading-6 text-ink">
-        There are enough barriers to starting over. Navigating resources shouldn&apos;t have to be
-        one of them.
-      </Text>
+        <View className="mt-5 gap-2.5">
+          {STATS.map((s) => (
+            <View key={s.value} className="rounded-card bg-surface p-4">
+              <Text className="text-[34px] font-extrabold tracking-tight text-brand">{s.value}</Text>
+              <Text className="mt-1 text-[13px] leading-5 text-muted">{s.label}</Text>
+            </View>
+          ))}
+        </View>
+      </Band>
 
-      <View className="mt-6 gap-2.5">
-        {STATS.map((s) => (
-          <View key={s.value} className="rounded-card bg-elevated p-4">
-            <Text className="text-[32px] font-extrabold tracking-tight text-brand">{s.value}</Text>
-            <Text className="mt-1 text-[13px] leading-5 text-muted">{s.label}</Text>
-          </View>
-        ))}
-      </View>
+      <Band tone="white">
+        <LinkRow
+          icon="mci:open-in-new"
+          tone="text-brand"
+          label="Read more at remerg.com"
+          onPress={() => openUrl(`${REMERG_ORIGIN}/about/`)}
+        />
+        <LinkRow
+          icon="mci:heart-outline"
+          tone="text-crisis"
+          label="Support Remerg"
+          onPress={() => openUrl(`${REMERG_ORIGIN}/support/`)}
+        />
 
-      <LinkRow
-        icon="mci:open-in-new"
-        tone="text-brand"
-        label="Read more at remerg.com"
-        onPress={() => openUrl(`${REMERG_ORIGIN}/about/`)}
-      />
-      <LinkRow
-        icon="mci:heart-outline"
-        tone="text-crisis"
-        label="Support Remerg"
-        onPress={() => openUrl(`${REMERG_ORIGIN}/support/`)}
-      />
-
-      <View className="mt-8 border-t border-line pt-3.5">
-        <Text className="text-xs leading-5 text-muted">
+        <Text className="mt-6 text-xs leading-5 text-muted">
           This app is an independent client built against Remerg&apos;s public website. It is not
           published or endorsed by Remerg. Hotline numbers were verified on 18 September 2026 —
           always dial 911 in an emergency.
         </Text>
-      </View>
+      </Band>
     </Screen>
   );
 }
@@ -77,9 +88,9 @@ function LinkRow({
     <Pressable
       onPress={onPress}
       accessibilityRole="link"
-      className="mt-3 min-h-touch flex-row items-center gap-2.5 rounded-field border border-line px-3.5 active:opacity-70">
+      className="mb-3 min-h-touch flex-row items-center gap-2.5 rounded-card border-2 border-accent px-4 active:opacity-70">
       <Icon name={icon} size={18} className={tone} />
-      <Text className="text-[15px] font-bold text-ink">{label}</Text>
+      <Text className="text-[15px] font-extrabold text-brand">{label}</Text>
     </Pressable>
   );
 }

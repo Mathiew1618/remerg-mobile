@@ -6,7 +6,7 @@ export type BadgeTone = 'neutral' | 'accent' | 'brand' | 'crisis';
 
 const TONES: Record<BadgeTone, { wrap: string; text: string }> = {
   neutral: { wrap: 'bg-elevated', text: 'text-muted' },
-  accent: { wrap: 'bg-accent-soft', text: 'text-accent' },
+  accent: { wrap: 'bg-accent-soft', text: 'text-accent-ink' },
   brand: { wrap: 'bg-brand-soft', text: 'text-brand' },
   crisis: { wrap: 'bg-crisis-soft', text: 'text-crisis' },
 };

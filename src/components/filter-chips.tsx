@@ -30,9 +30,9 @@ export function FilterChips<K extends string>({
             accessibilityRole="button"
             accessibilityState={{ selected: on }}
             className={`min-h-[38px] justify-center rounded-full border px-3.5 active:opacity-70 ${
-              on ? 'border-brand bg-brand' : 'border-line bg-elevated'
+              on ? 'border-accent bg-accent' : 'border-line bg-elevated'
             }`}>
-            <Text className={`text-[13px] font-bold ${on ? 'text-brand-on' : 'text-ink'}`}>
+            <Text className={`text-[13px] font-bold ${on ? 'text-brand' : 'text-ink'}`}>
               {o.label}
             </Text>
           </Pressable>

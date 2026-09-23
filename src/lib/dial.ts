@@ -6,6 +6,7 @@
  */
 
 import * as Haptics from 'expo-haptics';
+import { router } from 'expo-router';
 import { Alert, Linking, Platform } from 'react-native';
 
 /**
@@ -47,7 +48,39 @@ export async function callNumber(raw: string, displayName?: string) {
   }
 }
 
-/** Hand off to Apple/Google Maps rather than embedding a map. */
+type PlaceTarget = {
+  name: string;
+  address?: string | null;
+  lat?: number | null;
+  lng?: number | null;
+  phone?: string | null;
+  website?: string | null;
+};
+
+/**
+ * "Directions" on any card. A place with coordinates opens the in-app map
+ * (app/place.tsx): the route, turn by turn, and a 3D view, without leaving the
+ * app. Only a record with no coordinates falls back to the phone's maps app.
+ */
+export function openPlace(t: PlaceTarget) {
+  if (typeof t.lat === 'number' && typeof t.lng === 'number') {
+    router.push({
+      pathname: '/place',
+      params: {
+        name: t.name,
+        lat: String(t.lat),
+        lng: String(t.lng),
+        ...(t.address ? { address: t.address } : {}),
+        ...(t.phone ? { phone: t.phone } : {}),
+        ...(t.website ? { website: t.website } : {}),
+      },
+    });
+    return;
+  }
+  void openDirections([t.name, t.address].filter(Boolean).join(', '));
+}
+
+/** Hand off to Apple/Google Maps: the fallback, and voice navigation. */
 export async function openDirections(query: string, lat?: number | null, lng?: number | null) {
   const hasCoords = typeof lat === 'number' && typeof lng === 'number';
   const url = hasCoords

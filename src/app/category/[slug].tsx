@@ -7,6 +7,8 @@ import { ResourceCard } from '@/components/resource-card';
 import { CommCorrFilters, ResourceFilters } from '@/components/resource-filters';
 import { ActionButton } from '@/components/ui/action-button';
 import { Icon } from '@/components/ui/icon';
+import { Call211 } from '@/components/call-211';
+import { Band } from '@/components/ui/band';
 import { Screen } from '@/components/ui/screen';
 import {
   COMMCORR_FETCHED_AT,
@@ -21,12 +23,10 @@ import {
   type ResourceFilter,
 } from '@/data/resources';
 import { categoryBySlug } from '@/data/taxonomy';
-import { useTheme } from '@/hooks/use-theme';
-import { callNumber, openDirections, openUrl } from '@/lib/dial';
+import { callNumber, openPlace, openUrl } from '@/lib/dial';
 import { REMERG_ORIGIN, fetchResources, type Resource as LiveResource } from '@/lib/remerg';
 
 export default function CategoryScreen() {
-  const colors = useTheme();
   const navigation = useNavigation();
   const { slug } = useLocalSearchParams<{ slug: string }>();
   const category = categoryBySlug(slug);
@@ -81,21 +81,24 @@ export default function CategoryScreen() {
     setCcFilters((cur) => (cur.includes(f) ? cur.filter((x) => x !== f) : [...cur, f]));
 
   return (
-    <Screen>
-      <View className="mb-3.5 flex-row items-center gap-3.5 rounded-card bg-elevated p-4">
-        <View className="h-14 w-14 items-center justify-center rounded-2xl bg-brand-soft">
-          <Icon name={category.icon} size={28} className="text-brand" />
+    <Screen bands>
+      <Band tone="green">
+        <View className="flex-row items-center gap-3.5">
+          <View className="h-16 w-16 items-center justify-center rounded-full bg-surface">
+            <Icon name={category.icon} size={30} className="text-brand" />
+          </View>
+          <View className="flex-1">
+            <Text className="text-[24px] font-extrabold uppercase leading-7 tracking-wide text-brand">{category.name}</Text>
+            <Text className="mt-1 text-[14px] font-semibold leading-5 text-brand">{category.blurb}</Text>
+          </View>
         </View>
-        <View className="flex-1">
-          <Text className="text-[22px] font-extrabold tracking-tight text-ink">{category.name}</Text>
-          <Text className="mt-0.5 text-[13px] leading-5 text-muted">{category.blurb}</Text>
-        </View>
-      </View>
+      </Band>
 
+      <Band tone="blue">
       {programs.length > 0 ? (
         <>
           <CommCorrFilters active={ccFilters} onToggle={toggleCc} />
-          <Text className="mb-2 text-xs font-bold text-muted">
+          <Text className="mb-2 mt-2 text-xs font-bold text-white/75">
             {shownPrograms.length} of {programs.length}{' '}
             {programs.length === 1 ? 'program' : 'programs'} statewide
           </Text>
@@ -103,11 +106,11 @@ export default function CategoryScreen() {
             <HalfwayHouseCard key={p.id} program={p} />
           ))}
           {shownPrograms.length === 0 ? (
-            <Text className="py-6 text-center text-sm text-muted">
+            <Text className="py-6 text-center text-sm text-white/80">
               No program matches every filter. Try removing one.
             </Text>
           ) : null}
-          <Text className="mt-1 text-[11px] italic leading-4 text-muted">
+          <Text className="mt-1 text-[11px] italic leading-4 text-white/70">
             Source: Colorado DCJ, Office of Community Corrections · pulled {COMMCORR_FETCHED_AT}.
             Beds are assigned by your community corrections board — this list is who exists, not
             who has space.
@@ -116,25 +119,25 @@ export default function CategoryScreen() {
       ) : bundled.length > 0 ? (
         <>
           <ResourceFilters active={filters} onToggle={toggle} />
-          <Text className="mb-2 text-xs font-bold text-muted">
+          <Text className="mb-2 mt-2 text-xs font-bold text-white/75">
             {shown.length} {shown.length === 1 ? 'place' : 'places'} in Colorado
           </Text>
           {shown.map((r) => (
             <ResourceCard key={r.id} resource={r} />
           ))}
-          <Text className="mt-1 text-[11px] italic leading-4 text-muted">
+          <Text className="mt-1 text-[11px] italic leading-4 text-white/70">
             Source: SAMHSA findtreatment.gov · pulled {RESOURCES_FETCHED_AT}. Call ahead to confirm
             hours and intake.
           </Text>
         </>
       ) : loading ? (
         <View className="items-center gap-2 py-10">
-          <ActivityIndicator color={colors.tint} />
-          <Text className="text-sm text-muted">Checking remerg.com…</Text>
+          <ActivityIndicator color="#FFFFFF" />
+          <Text className="text-sm text-white/80">Checking remerg.com…</Text>
         </View>
       ) : live.length > 0 ? (
         live.map((r) => (
-          <View key={r.id} className="mb-3 rounded-card border border-line bg-surface p-3.5">
+          <View key={r.id} className="mb-3 rounded-card bg-surface p-4">
             <Text className="text-[17px] font-bold text-ink">{r.name}</Text>
             {r.address ? <Text className="mt-0.5 text-[13px] text-muted">{r.address}</Text> : null}
             <View className="mt-3.5 flex-row flex-wrap gap-2">
@@ -150,7 +153,7 @@ export default function CategoryScreen() {
                 <ActionButton
                   icon="mci:navigation-variant"
                   label="Directions"
-                  onPress={() => openDirections(r.address!, r.lat, r.lng)}
+                  onPress={() => openPlace({ name: r.name, address: r.address, lat: r.lat, lng: r.lng, phone: r.phone, website: r.website })}
                 />
               ) : null}
               {r.website ? (
@@ -160,8 +163,8 @@ export default function CategoryScreen() {
           </View>
         ))
       ) : (
-        <View className="items-center gap-2.5 rounded-card border border-line bg-elevated p-6">
-          <View className="h-14 w-14 items-center justify-center rounded-2xl bg-brand-soft">
+        <View className="items-center gap-2.5 rounded-card bg-surface p-6">
+          <View className="h-14 w-14 items-center justify-center rounded-full bg-accent">
             <Icon name="mci:lock-outline" size={28} className="text-brand" />
           </View>
           <Text className="text-center text-[17px] font-bold text-ink">No public listings yet</Text>
@@ -188,6 +191,11 @@ export default function CategoryScreen() {
           {error ? <Text className="mt-1 text-[11px] text-muted">{error}</Text> : null}
         </View>
       )}
+      </Band>
+
+      <Band tone="white">
+        <Call211 />
+      </Band>
     </Screen>
   );
 }
