@@ -7,6 +7,10 @@ recidivism, one resource at a time."
 > **Independent client.** This app is not published, endorsed by, or affiliated with Remerg. It was
 > built against their public website. Hotline numbers were verified 18 September 2026.
 
+<p align="center">
+  <img src="docs/screenshots/home.png" alt="Remerg Mobile home screen" width="320">
+</p>
+
 ---
 
 ## What the site audit turned up
